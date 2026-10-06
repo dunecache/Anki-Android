@@ -82,20 +82,39 @@ jobs:
       # AGP can auto-download a missing platform, but doing it explicitly means a
       # missing sdkmanager fails here with a readable message rather than deep
       # inside the Gradle build.
+      # Android 11+ platforms carry a minor version component, and this project
+      # sets compileSdk = 37 with compileSdkMinor = 0, so the package it needs is
+      # platforms;android-37.0, NOT platforms;android-37. Installing the wrong
+      # one fails the run with:
+      #     Warning: Failed to find package 'platforms;android-37'
       - name: Install the compileSdk platform
         run: |
           set -euo pipefail
-          COMPILE_SDK=$(sed -n 's/^compileSdk = "\(.*\)"/\1/p' gradle/libs.versions.toml)
+          COMPILE_SDK=$(sed -n 's/^compileSdk = "\(.*\)"$/\1/p' gradle/libs.versions.toml)
+          COMPILE_MINOR=$(sed -n 's/^compileSdkMinor = "\(.*\)"$/\1/p' gradle/libs.versions.toml)
           if [ -z "$COMPILE_SDK" ]; then
             echo "Could not read compileSdk from gradle/libs.versions.toml"; exit 1
           fi
-          echo "compileSdk is $COMPILE_SDK"
+          # No compileSdkMinor key means the platform has no minor component.
+          if [ -n "$COMPILE_MINOR" ]; then
+            PLATFORM="android-$COMPILE_SDK.$COMPILE_MINOR"
+          else
+            PLATFORM="android-$COMPILE_SDK"
+          fi
+          echo "compileSdk $COMPILE_SDK, minor ${COMPILE_MINOR:-none} -> platforms;$PLATFORM"
+
           SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-}}"
           SDKMANAGER="$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager"
           if [ ! -x "$SDKMANAGER" ]; then
             SDKMANAGER=$(command -v sdkmanager)
           fi
-          yes | "$SDKMANAGER" --install "platforms;android-$COMPILE_SDK" > /dev/null
+          # Deliberately not fatal: the runner image may already ship the platform,
+          # and AGP can auto-download a missing one itself.
+          if yes | "$SDKMANAGER" --install "platforms;$PLATFORM" > /dev/null; then
+            echo "Installed platforms;$PLATFORM"
+          else
+            echo "::warning::Could not install platforms;$PLATFORM; continuing and letting AGP resolve it"
+          fi
 
       # The `debug` build type always builds a universal APK alongside the per-ABI
       # ones (splits.abi.isUniversalApk in AnkiDroid/build.gradle.kts), so no
