@@ -79,8 +79,8 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/sort_chip"
-                    android:layout_width="36dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/m3_touch_target_min"
+                    android:layout_height="@dimen/m3_touch_target_min"
                     app:chipStartPadding="8dp"
                     app:chipIconSize="22dp"
                     app:chipIcon="@drawable/ic_sort_24" />
