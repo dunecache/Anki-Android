@@ -56,47 +56,57 @@
     <LinearLayout
         android:id="@+id/counts_layout"
         android:contentDescription="@string/deck_picker_counts"
-        android:background="?attr/selectableItemBackground"
+        android:background="@drawable/deck_counts_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:minWidth="70dp"
-        android:gravity="end"
+        android:paddingHorizontal="@dimen/deck_counts_pill_padding_horizontal"
+        android:layout_margin="@dimen/deck_counts_pill_margin"
+        android:gravity="center_vertical"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true" >
+        <!-- Fixed width + end gravity is what makes these three columns line up on
+             every row. With wrap_content the column edge followed the digit count, so
+             the Learn column's right edge sat at a different x on each row.
+             tnum gives tabular figures, so digits share a width and the columns
+             stay aligned at any count. -->
         <com.ichi2.ui.FixedTextView
             android:id="@+id/deck_new"
             android:contentDescription="@string/deck_picker_new"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/deck_counts_cell_width"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             android:background="@color/transparent"
-            android:gravity="center"
-            android:paddingEnd="5dip"
+            android:fontFeatureSettings="tnum"
+            android:includeFontPadding="false"
+            android:gravity="end"
             android:textSize="14sp"
             tools:text="10" />
 
         <com.ichi2.ui.FixedTextView
             android:id="@+id/deck_learn"
             android:contentDescription="@string/deck_picker_lrn"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/deck_counts_cell_width"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             android:background="@color/transparent"
-            android:gravity="center"
-            android:paddingEnd="5dip"
+            android:fontFeatureSettings="tnum"
+            android:includeFontPadding="false"
+            android:gravity="end"
             android:textSize="14sp"
             tools:text="42" />
 
         <com.ichi2.ui.FixedTextView
             android:id="@+id/deck_review"
             android:contentDescription="@string/deck_picker_rev"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/deck_counts_cell_width"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="6dip"
+            android:layout_gravity="center_vertical"
             android:background="@color/transparent"
-            android:gravity="center"
+            android:fontFeatureSettings="tnum"
+            android:includeFontPadding="false"
+            android:gravity="end"
             android:textSize="14sp"
             tools:text="13" />
     </LinearLayout>

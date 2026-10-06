@@ -230,13 +230,18 @@ class DeckAdapter(
     }
 
     init {
-        // Get the colors from the theme attributes
+        // Get the colors from the theme attributes.
+        // The deckNew*/deckZero* attributes are the deck list's own values: counts are
+        // drawn on the grouping container and the counts pill, and the shared
+        // newCountColor/learnCountColor/reviewCountColor/zeroCountColor attributes do not
+        // reach WCAG AA on those surfaces. The shared attributes are read unchanged by
+        // the card browser's card-state icons, StudyOptions and the reviewer top bar.
         val attrs =
             intArrayOf(
-                R.attr.zeroCountColor,
-                R.attr.newCountColor,
-                R.attr.learnCountColor,
-                R.attr.reviewCountColor,
+                R.attr.deckZeroCountColor,
+                R.attr.deckNewCountColor,
+                R.attr.deckLearnCountColor,
+                R.attr.deckReviewCountColor,
                 R.attr.currentDeckBackground,
                 android.R.attr.textColor,
                 R.attr.dynDeckColor,

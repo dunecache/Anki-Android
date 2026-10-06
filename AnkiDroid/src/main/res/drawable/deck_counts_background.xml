@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+  -->
+<!-- Background for the deck row's counts zone.
+
+     The counts zone is the row's second tap target (it opens the deck overview)
+     and previously had no resting affordance at all - only a ripple, so the zone
+     was invisible until touched.
+
+     This gives it a persistent tonal pill (deck_counts_pill) while keeping the
+     press feedback it already had, so no interaction changes. The ripple mask is
+     the same rounded shape so the highlight follows the pill rather than a
+     rectangle. -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/deck_counts_pill">
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFFFFFFF" />
+            <corners android:radius="@dimen/deck_counts_pill_corner_radius" />
+        </shape>
+    </item>
+</ripple>
