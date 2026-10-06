@@ -19,7 +19,7 @@
 # A debug build has applicationId com.ichi2.anki.debug, so it installs alongside
 # a real AnkiDroid install and keeps its own data.
 
-name: "\U0001F9EA Debug APK Release"
+name: "🧪 Debug APK Release"
 
 on:
   workflow_dispatch:
@@ -154,8 +154,8 @@ jobs:
           TITLE="AnkiDroid $VERSION-debug (${{ github.ref_name }}, $SHORT_SHA)"
 
           # Quoted heredoc: the notes contain backticks, which an unquoted
-          # heredoc would treat as command substitution. ${{ }} substitution by the
-          # runner happens before the shell sees the text either way.
+          # heredoc would treat as command substitution. Expression substitution by
+          # the runner happens before the shell sees the text either way.
           cat > release-notes.md <<'EOF'
           :warning: **Debug build. Not for distribution.**
 
