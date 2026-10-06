@@ -53,6 +53,12 @@
                             android:scrollbars="vertical" />
                     </com.ichi2.anki.ui.BottomFadeFrameLayout>
 
+                    <!-- The studied-today line. It stays exactly where it is, and keeps its id, its
+     bottom alignment and its margins, because DeckPickerInsetsTest asserts the FAB's
+         exact distance from the window bottom against this view's height:
+             navBarBottom + fabColumnPadding + fabMargin + summaryTextHeight / 2
+         raiseFabAboveSummary() computes the same value at runtime. Only its text
+         styling changes here. -->
                     <com.ichi2.ui.FixedTextView
                         android:id="@+id/review_summary_text_view"
                         android:layout_width="match_parent"
@@ -63,7 +69,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_marginBottom="4dp"
-                        android:gravity="center"/>
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="?attr/deckSummaryTextColor"
+                        android:gravity="center" />
 
                 </RelativeLayout>
 
