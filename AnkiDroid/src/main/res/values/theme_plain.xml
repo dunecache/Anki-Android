@@ -75,7 +75,7 @@
         <item name="currentDeckBackground">@drawable/item_background_selected</item>
         <!-- Home screen deck list only. Plain inherits the light surface containers,
              which are neutral greys (#F9F9F9 / #F4F4F4); new/learn/review already clear
-             AA there, only zeroCountColor needs replacing. Measured worst-case ratios:
+             AA there. Measured worst-case ratios:
              new 8.17:1, learn 4.53:1, review 4.66:1, zero 5.63:1. -->
         <item name="deckNewCountColor">@color/material_indigo_700</item>
         <item name="deckLearnCountColor">@color/material_red_700</item>
@@ -98,16 +98,12 @@
         <item name="reviewerNewCountColor">@color/material_indigo_700</item>
         <item name="reviewerLearnCountColor">@color/material_red_700</item>
         <item name="reviewerReviewCountColor">@color/material_green_800</item>
-        <item name="reviewerBottomBarBackground">?attr/colorSurfaceContainer</item>
         <!-- A filled *tonal* button, not a colorPrimary one: AnkiDroid's
              colorPrimary is a light blue in this theme, so white on it measures
              2.63:1 - well under AA. colorSurfaceContainerHighest with
              colorOnSurface clears it comfortably. -->
         <item name="reviewerShowAnswerBackground">?attr/colorSurfaceContainerHighest</item>
         <item name="reviewerShowAnswerLabelColor">?attr/colorOnSurface</item>
-        <item name="reviewerEaseBackground">?attr/colorSurfaceContainerHigh</item>
-        <item name="reviewerEaseLabelColor">?attr/colorOnSurface</item>
-        <item name="reviewerEaseIntervalColor">?attr/colorOnSurfaceVariant</item>
         <item name="editorFieldContainerColor">?attr/colorSurfaceContainerLow</item>
         <item name="editorFieldStrokeColor">?attr/colorOutline</item>
         <item name="editorFieldLabelColor">?attr/colorOnSurfaceVariant</item>
@@ -117,9 +113,6 @@
         <item name="editorToolbarBackground">?attr/colorSurfaceContainer</item>
         <item name="browserHeaderBackground">?attr/colorSurfaceContainer</item>
         <item name="browserHeaderLabelColor">?attr/colorOnSurfaceVariant</item>
-        <item name="browserHeaderActiveColor">?attr/colorOnSurface</item>
-        <item name="browserRowDivider">?attr/colorOutlineVariant</item>
-        <item name="browserStateStrokeColor">?attr/colorOnSurfaceVariant</item>
 
         <item name="snackbarButtonTextColor">#96bdce</item>
 

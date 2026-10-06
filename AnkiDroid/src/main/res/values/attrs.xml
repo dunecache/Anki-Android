@@ -126,10 +126,9 @@
     <attr name="newCountColor" format="color"/>
     <attr name="learnCountColor" format="color"/>
     <attr name="reviewCountColor" format="color"/>
-    <attr name="zeroCountColor" format="color"/>
     <attr name="buryCountColor" format="color"/>
     <!-- Deck list (home screen) only.
-         newCountColor/learnCountColor/reviewCountColor/zeroCountColor above are shared with
+         newCountColor/learnCountColor/reviewCountColor above are shared with
          the card browser card-state icons, StudyOptions and the reviewer top bar, so their
          values must not change. These Home-screen-scoped variants exist because the deck
          list draws counts on colorSurfaceContainer / colorSurfaceContainerHigh, and the
@@ -163,12 +162,8 @@
     <attr name="reviewerNewCountColor" format="color"/>
     <attr name="reviewerLearnCountColor" format="color"/>
     <attr name="reviewerReviewCountColor" format="color"/>
-    <attr name="reviewerBottomBarBackground" format="color"/>
     <attr name="reviewerShowAnswerBackground" format="color"/>
     <attr name="reviewerShowAnswerLabelColor" format="color"/>
-    <attr name="reviewerEaseBackground" format="color"/>
-    <attr name="reviewerEaseLabelColor" format="color"/>
-    <attr name="reviewerEaseIntervalColor" format="color"/>
     <!-- Note editor -->
     <attr name="editorFieldContainerColor" format="color"/>
     <attr name="editorFieldStrokeColor" format="color"/>
@@ -180,9 +175,6 @@
     <!-- Card browser -->
     <attr name="browserHeaderBackground" format="color"/>
     <attr name="browserHeaderLabelColor" format="color"/>
-    <attr name="browserHeaderActiveColor" format="color"/>
-    <attr name="browserRowDivider" format="color"/>
-    <attr name="browserStateStrokeColor" format="color"/>
     <!-- Study Screen button backgrounds -->
     <attr name="showAnswerButtonBackground" format="color"/>
     <attr name="answerButtonBackground" format="color"/>

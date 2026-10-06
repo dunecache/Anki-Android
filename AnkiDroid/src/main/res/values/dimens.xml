@@ -58,7 +58,6 @@
          to one screen, so these are deliberately not named after a screen. -->
     <dimen name="m3_shape_corner_medium">12dp</dimen>
     <dimen name="m3_shape_corner_large">16dp</dimen>
-    <dimen name="m3_shape_corner_full">28dp</dimen>
     <dimen name="m3_touch_target_min">48dp</dimen>
     <dimen name="m3_field_gap">12dp</dimen>
     <dimen name="m3_screen_margin">16dp</dimen>
