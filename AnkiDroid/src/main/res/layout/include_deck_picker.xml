@@ -18,8 +18,12 @@
 
         <!-- "Today" header: due total plus the New / Learn / Due key.
              Above the SwipeRefreshLayout so it stays put and never takes part in the
-             pull-to-sync gesture. -->
-        <include layout="@layout/include_deck_picker_header" />
+             pull-to-sync gesture.
+             The android:id on the include tag is what makes view binding generate the
+             deckPickerHeader field; an include without one gets no field at all. -->
+        <include
+            android:id="@+id/deck_picker_header"
+            layout="@layout/include_deck_picker_header" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/pull_to_sync_wrapper"
