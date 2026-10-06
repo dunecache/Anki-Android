@@ -66,6 +66,24 @@
         <item name="reviewCountColor">@color/material_green_200</item>
         <item name="buryCountColor">@color/disabled_gray_dark</item>
         <item name="zeroCountColor">#404040</item>
+        <!-- Home screen deck list only. Counts are drawn on colorSurfaceContainer
+             (#31363B) and colorSurfaceContainerHigh (#424C54); the shared values above
+             miss AA on those (new 3.80:1, learn 4.08:1, zero 1.18:1). Measured
+             worst-case ratios: new 5.01:1, learn 4.52:1, review 5.34:1, zero 4.60:1. -->
+        <item name="deckNewCountColor">@color/material_blue_200</item>
+        <item name="deckLearnCountColor">@color/deck_learn_count_dark</item>
+        <item name="deckReviewCountColor">@color/material_green_200</item>
+        <item name="deckZeroCountColor">@color/material_blue_grey_200</item>
+        <item name="deckGroupBackground">?attr/colorSurfaceContainer</item>
+        <item name="deckGroupTitleColor">?attr/colorOnSurface</item>
+        <item name="deckGroupSubtitleColor">?attr/colorOnSurfaceVariant</item>
+        <item name="deckCountsBackground">?attr/colorSurfaceContainerHigh</item>
+        <item name="deckHeaderDueColor">?attr/colorOnSurface</item>
+        <item name="deckHeaderLabelColor">?attr/colorOnSurfaceVariant</item>
+        <item name="deckSummaryTextColor">?attr/colorOnSurfaceVariant</item>
+        <item name="deckLegendNewColor">?attr/deckNewCountColor</item>
+        <item name="deckLegendLearnColor">?attr/deckLearnCountColor</item>
+        <item name="deckLegendReviewColor">?attr/deckReviewCountColor</item>
         <!-- Study Screen colors -->
         <item name="showAnswerButtonBackground">#22333f</item>
         <item name="againButtonBackground">@color/material_red_800</item>

@@ -73,6 +73,24 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
 
         <item name="currentDeckBackground">@drawable/item_background_selected</item>
+        <!-- Home screen deck list only. Plain inherits the light surface containers,
+             which are neutral greys (#F9F9F9 / #F4F4F4); new/learn/review already clear
+             AA there, only zeroCountColor needs replacing. Measured worst-case ratios:
+             new 8.17:1, learn 4.53:1, review 4.66:1, zero 5.63:1. -->
+        <item name="deckNewCountColor">@color/material_indigo_700</item>
+        <item name="deckLearnCountColor">@color/material_red_700</item>
+        <item name="deckReviewCountColor">@color/material_green_800</item>
+        <item name="deckZeroCountColor">@color/material_grey_700</item>
+        <item name="deckGroupBackground">?attr/colorSurfaceContainer</item>
+        <item name="deckGroupTitleColor">?attr/colorOnSurface</item>
+        <item name="deckGroupSubtitleColor">?attr/colorOnSurfaceVariant</item>
+        <item name="deckCountsBackground">?attr/colorSurfaceContainerHigh</item>
+        <item name="deckHeaderDueColor">?attr/colorOnSurface</item>
+        <item name="deckHeaderLabelColor">?attr/colorOnSurfaceVariant</item>
+        <item name="deckSummaryTextColor">?attr/colorOnSurfaceVariant</item>
+        <item name="deckLegendNewColor">?attr/deckNewCountColor</item>
+        <item name="deckLegendLearnColor">?attr/deckLearnCountColor</item>
+        <item name="deckLegendReviewColor">?attr/deckReviewCountColor</item>
 
         <item name="snackbarButtonTextColor">#96bdce</item>
 

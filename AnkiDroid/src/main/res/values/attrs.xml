@@ -128,6 +128,28 @@
     <attr name="reviewCountColor" format="color"/>
     <attr name="zeroCountColor" format="color"/>
     <attr name="buryCountColor" format="color"/>
+    <!-- Deck list (home screen) only.
+         newCountColor/learnCountColor/reviewCountColor/zeroCountColor above are shared with
+         the card browser card-state icons, StudyOptions and the reviewer top bar, so their
+         values must not change. These Home-screen-scoped variants exist because the deck
+         list draws counts on colorSurfaceContainer / colorSurfaceContainerHigh, and the
+         shared values do not reach WCAG AA on those surfaces. -->
+    <attr name="deckNewCountColor" format="color"/>
+    <attr name="deckLearnCountColor" format="color"/>
+    <attr name="deckReviewCountColor" format="color"/>
+    <attr name="deckZeroCountColor" format="color"/>
+    <!-- Material 3 grouping for the deck list: one rounded container per top-level
+         deck and its descendants, plus a tonal pill behind the counts tap zone. -->
+    <attr name="deckGroupBackground" format="color"/>
+    <attr name="deckGroupTitleColor" format="color"/>
+    <attr name="deckGroupSubtitleColor" format="color"/>
+    <attr name="deckCountsBackground" format="color"/>
+    <attr name="deckHeaderDueColor" format="color"/>
+    <attr name="deckHeaderLabelColor" format="color"/>
+    <attr name="deckSummaryTextColor" format="color"/>
+    <attr name="deckLegendNewColor" format="color"/>
+    <attr name="deckLegendLearnColor" format="color"/>
+    <attr name="deckLegendReviewColor" format="color"/>
     <!-- Study Screen button backgrounds -->
     <attr name="showAnswerButtonBackground" format="color"/>
     <attr name="answerButtonBackground" format="color"/>

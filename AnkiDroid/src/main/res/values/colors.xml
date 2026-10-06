@@ -73,5 +73,11 @@
     <color name="idle_divider_color">#C7C7C7</color>
     <color name="drag_divider_color">#1A90FF</color>
     <color name="divider_handle_color">#4D4D4D</color>
+
+    <!-- Learn (learning) count on the deck list's dark themes.
+         material_red_200 only reaches 4.08:1 on colorSurfaceContainerHigh (#424C54).
+         This is red_200 stepped toward white until it clears WCAG AA: 4.52:1 on
+         colorSurfaceContainerHigh and 4.54:1 on colorSurfaceContainer (#31363B). -->
+    <color name="deck_learn_count_dark">#F1A7A7</color>
 </resources>
 
