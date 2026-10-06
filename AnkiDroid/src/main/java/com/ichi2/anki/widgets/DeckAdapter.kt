@@ -143,7 +143,18 @@ class DeckAdapter(
         // Material 3 grouping: the row's rounded container is chosen from its position
         // within its group. currentList is already materialised by ListAdapter, so these
         // are two comparisons and no allocation per bind.
-        binding.deckGroupBackground.setBackgroundResource(groupShapeAt(position, node.depth))
+        // With a custom background image set the container is drawn translucent, the
+        // same way the selected row already is, so the image stays visible behind the
+        // list. Without one it is fully opaque.
+        binding.deckGroupBackground.apply {
+            setBackgroundResource(groupShapeAt(position, node.depth))
+            alpha =
+                if (activityHasBackground) {
+                    GROUP_BACKGROUND_ALPHA_AGAINST_BACKGROUND
+                } else {
+                    1f
+                }
+        }
         // Set the expander icon and padding according to whether or not there are any subdecks
         if (hasSubdecks) {
             binding.deckLayout.setPaddingRelative(startPaddingSmall, 0, endPadding, 0)
@@ -280,6 +291,12 @@ class DeckAdapter(
     companion object {
         // Make the selected deck roughly half transparent if there is a background
         private const val SELECTED_DECK_ALPHA_AGAINST_BACKGROUND = 0.45
+
+        /**
+         * Opacity of the Material 3 group container while a custom background image is
+         * set. The container is opaque by default; this keeps the image visible.
+         */
+        private const val GROUP_BACKGROUND_ALPHA_AGAINST_BACKGROUND = 0.55f
 
         /** Sentinel for ViewHolder.appliedDeckNameRole: no role applied yet. */
         private const val NO_DECK_NAME_ROLE = -1
