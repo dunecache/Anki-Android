@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+  -->
+<!-- "Today" header shown between the toolbar and the deck list.
+
+     It answers the two questions the bare list left open: how much is due right now,
+     and what the three coloured numbers in each row mean. The due total is the same
+     number the toolbar subtitle already shows - it comes from the same existing
+     flow and adds no new backend call - and the legend keys each count column to its
+     colour.
+
+     Every colour is a theme role and every size is a Material 3 type role, so this
+     follows all five AnkiDroid themes. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/deck_picker_header"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/deck_header_padding_horizontal"
+    android:paddingEnd="@dimen/deck_header_padding_horizontal"
+    android:paddingTop="@dimen/deck_header_padding_vertical"
+    android:paddingBottom="@dimen/deck_header_padding_vertical">
+
+    <LinearLayout
+        android:id="@+id/deck_header_due_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="true"
+        android:gravity="center_vertical">
+
+        <com.ichi2.ui.FixedTextView
+            android:id="@+id/deck_header_due_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceHeadlineMedium"
+            android:textColor="?attr/deckHeaderDueColor"
+            tools:text="50" />
+
+        <com.ichi2.ui.FixedTextView
+            android:id="@+id/deck_header_due_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/deck_header_legend_gap"
+            android:text="@string/deck_header_due_label"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?attr/deckHeaderLabelColor" />
+    </LinearLayout>
+
+    <!-- Legend: which colour means which count column. Decorative only - the counts
+         themselves already announce their meaning via their own content descriptions,
+         so this row is not exposed to accessibility services. -->
+    <LinearLayout
+        android:id="@+id/deck_header_legend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/deck_header_legend_gap"
+        android:orientation="horizontal"
+        android:importantForAccessibility="no">
+
+        <View
+            android:id="@+id/deck_legend_key_new"
+            android:layout_width="@dimen/deck_header_legend_dot"
+            android:layout_height="@dimen/deck_header_legend_dot"
+            android:background="@drawable/deck_legend_key"
+            android:backgroundTint="?attr/deckLegendNewColor" />
+
+        <com.ichi2.ui.FixedTextView
+            android:id="@+id/deck_legend_label_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/deck_header_legend_gap"
+            android:text="@string/deck_picker_legend_new"
+            android:textAppearance="?attr/textAppearanceLabelMedium"
+            android:textColor="?attr/deckHeaderLabelColor" />
+
+        <View
+            android:id="@+id/deck_legend_key_learn"
+            android:layout_width="@dimen/deck_header_legend_dot"
+            android:layout_height="@dimen/deck_header_legend_dot"
+            android:layout_marginStart="@dimen/deck_header_padding_horizontal"
+            android:background="@drawable/deck_legend_key"
+            android:backgroundTint="?attr/deckLegendLearnColor" />
+
+        <com.ichi2.ui.FixedTextView
+            android:id="@+id/deck_legend_label_learn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/deck_header_legend_gap"
+            android:text="@string/deck_picker_legend_learn"
+            android:textAppearance="?attr/textAppearanceLabelMedium"
+            android:textColor="?attr/deckHeaderLabelColor" />
+
+        <View
+            android:id="@+id/deck_legend_key_review"
+            android:layout_width="@dimen/deck_header_legend_dot"
+            android:layout_height="@dimen/deck_header_legend_dot"
+            android:layout_marginStart="@dimen/deck_header_padding_horizontal"
+            android:background="@drawable/deck_legend_key"
+            android:backgroundTint="?attr/deckLegendReviewColor" />
+
+        <com.ichi2.ui.FixedTextView
+            android:id="@+id/deck_legend_label_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/deck_header_legend_gap"
+            android:text="@string/deck_picker_legend_review"
+            android:textAppearance="?attr/textAppearanceLabelMedium"
+            android:textColor="?attr/deckHeaderLabelColor" />
+    </LinearLayout>
+</LinearLayout>

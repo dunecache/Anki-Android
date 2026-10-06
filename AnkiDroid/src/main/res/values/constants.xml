@@ -16,6 +16,18 @@
 -->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation,DuplicateCrowdInStrings">
 
+    <!-- Deck list "Today" header. Colour-key labels explaining what the three
+         count columns mean. These are untranslated for now: the deck list legend is
+         new, the equivalent backend (TR) strings have not been identified, and
+         TranslationTest treats any string in an NN-*.xml file as translatable and
+         fails the build if it duplicates a backend translation. constants.xml is the
+         file 12-dont-translate.xml points to for strings that cannot be translated.
+         NEEDS OWNER DECISION: replace with backend TR strings once identified. -->
+    <string name="deck_header_due_label">due today</string>
+    <string name="deck_picker_legend_new">New</string>
+    <string name="deck_picker_legend_learn">Learn</string>
+    <string name="deck_picker_legend_review">Due</string>
+
     <!--
         WARNING: These values here match static values defined in Deck.java DO
         NOT edit them, unless you change their corresponding values

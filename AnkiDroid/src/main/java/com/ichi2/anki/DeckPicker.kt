@@ -555,6 +555,7 @@ open class DeckPicker :
 
         deckPickerBinding.deckPickerContent.visibility = View.GONE
         deckPickerBinding.noDecksPlaceholder.visibility = View.GONE
+        deckPickerBinding.deckPickerHeader.root.visibility = View.GONE
 
         // specify a LinearLayoutManager for the RecyclerView
         decksLayoutManager = LinearLayoutManager(this)
@@ -828,6 +829,9 @@ open class DeckPicker :
             }
             // Hide the background when there are no cards to improve text readability.
             deckPickerBinding.background.isVisible = !isInInitialState
+            // The "Today" header belongs to the deck list, so it follows the same
+            // initial state. Set before the fade branch so it applies in both paths.
+            deckPickerBinding.deckPickerHeader.root.isVisible = !isInInitialState
             if (animationDisabled()) {
                 deckPickerBinding.deckPickerContent.isVisible = !isInInitialState
                 deckPickerBinding.noDecksPlaceholder.isVisible = isInInitialState
@@ -860,6 +864,12 @@ open class DeckPicker :
         }
 
         fun onCardsDueChanged(dueCount: Int?) {
+            // The "Today" header shows the same total the toolbar subtitle shows. It reads
+            // the existing flow, so there is no new backend call and no new scheduling logic.
+            val header = deckPickerBinding.deckPickerHeader
+            header.deckHeaderDueCount.text = dueCount?.toString().orEmpty()
+            header.deckHeaderDueRow.isVisible = dueCount != null
+
             if (dueCount == null) {
                 supportActionBar?.subtitle = null
                 return

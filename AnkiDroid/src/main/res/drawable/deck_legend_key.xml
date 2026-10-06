@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+  -->
+<!-- Oval key for one entry in the deck list's New / Learn / Due legend. The tint is
+     applied per instance with android:backgroundTint, so a single drawable serves all
+     three keys and each theme's legend colour is respected. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@android:color/white" />
+    <size
+        android:width="@dimen/deck_header_legend_dot"
+        android:height="@dimen/deck_header_legend_dot" />
+</shape>
