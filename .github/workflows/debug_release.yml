@@ -33,11 +33,6 @@ on:
           - full
           - play
           - amazon
-      all_apis:
-        description: "Upload every per-ABI APK as well as the universal one."
-        required: false
-        default: false
-        type: boolean
       draft:
         description: "Create as a draft, keeping the release invisible until you publish it yourself."
         required: false
@@ -116,10 +111,16 @@ jobs:
             echo "::warning::Could not install platforms;$PLATFORM; continuing and letting AGP resolve it"
           fi
 
-      # The `debug` build type always builds a universal APK alongside the per-ABI
-      # ones (splits.abi.isUniversalApk in AnkiDroid/build.gradle.kts), so no
-      # -Duniversal-apk flag is needed. Unlike release.sh this passes no
-      # publishing task and no keystore environment variables.
+      # Unlike release.sh this passes no publishing task and no keystore
+      # environment variables, so the APK is signed with the standard Android
+      # debug keystore and never reaches a store.
+      #
+      # Note: despite the comment on AnkiDroid/build.gradle.kts:188, this project
+      # does NOT produce a universal debug APK. The debug build type sets
+      # splits.abi.isUniversalApk = true, but the top-level `splits { abi { reset() } }`
+      # block further down the same file runs afterwards and resets it. So the
+      # debug output is per-ABI only (armeabi-v7a, arm64-v8a, x86, x86_64) and this
+      # workflow attaches every one of them.
       - name: Assemble the debug APK
         env:
           FLAVOR: ${{ inputs.flavor }}
@@ -150,7 +151,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           FLAVOR: ${{ inputs.flavor }}
-          ALL_APIS: ${{ inputs.all_apis }}
           DRAFT: ${{ inputs.draft }}
           EXTRA_NOTES: ${{ inputs.notes }}
         run: |
@@ -201,26 +201,20 @@ jobs:
           # The release must exist before assets can be attached to it.
           gh release create "$TAG" "${ARGS[@]}"
 
-          # Always the universal APK. Fall back to arm64 if the build did not
-          # produce one, so the release never ends up with no asset at all.
-          if UNIVERSAL=$(ls dist/*-universal-*.apk 2>/dev/null | head -1) && [ -n "$UNIVERSAL" ]; then
-            echo "Attaching $UNIVERSAL"
-            gh release upload "$TAG" "$UNIVERSAL"
-          elif ARM64=$(ls dist/*arm64-v8a*.apk 2>/dev/null | head -1) && [ -n "$ARM64" ]; then
-            echo "No universal APK; attaching $ARM64"
-            gh release upload "$TAG" "$ARM64"
-          else
-            echo "No suitable APK found in dist/"; exit 1
+          # Attach every APK the build produced. This project emits per-ABI APKs
+          # only (see the note on the assemble step), so attaching all of them is
+          # what makes the release usable on any device.
+          shopt -s nullglob
+          APKS=(dist/*.apk)
+          shopt -u nullglob
+          if [ ${#APKS[@]} -eq 0 ]; then
+            echo "No APKs found in dist/"; exit 1
           fi
-
-          if [ "$ALL_APIS" = "true" ]; then
-            for apk in dist/*.apk; do
-              case "$apk" in
-                *-universal-*) ;;
-                *) echo "Attaching $apk"; gh release upload "$TAG" "$apk" ;;
-              esac
-            done
-          fi
+          for apk in "${APKS[@]}"; do
+            echo "Attaching $(basename "$apk")"
+            gh release upload "$TAG" "$apk"
+          done
+          echo "Attached ${#APKS[@]} APK(s)"
 
           echo
           gh release view "$TAG" --json url,isDraft,isPrerelease \
