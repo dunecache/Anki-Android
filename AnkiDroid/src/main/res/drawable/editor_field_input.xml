@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+  -->
+<!-- Material 3 outlined input for one note-type field.
+
+     The resting state is a 1dp outline; focusing thickens it to 2dp. The cue is a
+     change in stroke WIDTH, not only in colour, so it survives E-Ink and colour
+     vision differences.
+
+     This is applied to the FieldEditText itself rather than the enclosing row:
+     FieldEditText.init() captures its background into origBackground and
+     setDefaultStyle() restores it, and setDupeStyle() still overrides the
+     background for duplicate fields. Putting the outline on the row instead
+     would have required the row to become focused when the inner EditText is,
+     which Android does not propagate. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="?attr/editorFieldContainerColor" />
+            <stroke
+                android:width="@dimen/m3_stroke_thick"
+                android:color="?attr/colorPrimary" />
+            <corners android:radius="@dimen/m3_shape_corner_medium" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="?attr/editorFieldContainerColor" />
+            <stroke
+                android:width="@dimen/m3_stroke_thin"
+                android:color="?attr/editorFieldStrokeColor" />
+            <corners android:radius="@dimen/m3_shape_corner_medium" />
+        </shape>
+    </item>
+</selector>

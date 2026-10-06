@@ -63,6 +63,12 @@
     <dimen name="m3_field_gap">12dp</dimen>
     <dimen name="m3_screen_margin">16dp</dimen>
     <dimen name="m3_divider_thickness">1dp</dimen>
+    <dimen name="m3_stroke_thin">1dp</dimen>
+    <dimen name="m3_stroke_thick">2dp</dimen>
+    <dimen name="m3_field_horizontal_padding">12dp</dimen>
+    <!-- Was a literal 6dip on the editor's field list. Named so the file has no
+         hardcoded dimension; the value is unchanged. -->
+    <dimen name="m3_field_list_inset">6dp</dimen>
 
     <dimen name="mtrl_snackbar_background_corner_radius">8dp</dimen>
     <dimen name="popup_corner_radius">4dp</dimen>

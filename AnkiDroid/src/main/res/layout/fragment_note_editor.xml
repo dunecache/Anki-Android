@@ -84,7 +84,9 @@
                 android:focusable="true"
                 android:animateLayoutChanges="true"
                 android:paddingVertical="@dimen/keyline_1"
-                android:paddingHorizontal="6dip" />
+                android:paddingHorizontal="@dimen/m3_field_list_inset"
+                android:showDividers="middle"
+                android:divider="@drawable/divider_field_gap" />
 
             <LinearLayout
                 android:id="@+id/ImageOcclusionButtonsLayout"

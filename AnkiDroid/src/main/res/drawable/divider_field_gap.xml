@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+  -->
+<!-- Transparent vertical gap between note-type fields.
+
+     NoteEditorFragment.populateEditFields() adds each field with
+     addView(view), so any layout_margin on the field block would be discarded
+     (addView without LayoutParams regenerates them from the parent type).
+     LinearLayout's own showDividers is the one mechanism that spaces
+     programmatically-added children, so the gap is declared here instead. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <size android:height="@dimen/m3_field_gap" />
+    <solid android:color="@color/transparent" />
+</shape>
