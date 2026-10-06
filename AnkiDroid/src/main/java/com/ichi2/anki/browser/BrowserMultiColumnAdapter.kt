@@ -12,6 +12,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.annotation.ColorInt
@@ -91,6 +92,19 @@ class BrowserMultiColumnAdapter(
                         ViewBrowserColumnCellBinding.inflate(layoutInflater, binding.root, true).root
                     },
                 )
+
+                // Material 3 column weighting: the first column carries the sort field,
+                // which is usually a whole sentence, so it gets roughly twice the width of
+                // each of the others. Weight is applied here rather than in XML because
+                // every cell is inflated from the same layout and N is 2..21 columns.
+                // Widths stay proportional, so nothing overflows and short values do not
+                // stretch.
+                columnViews.forEachIndexed { index, cell ->
+                    (cell.layoutParams as? LinearLayout.LayoutParams)?.let { params ->
+                        params.weight = if (index == 0) FIRST_COLUMN_WEIGHT else 1f
+                        cell.layoutParams = params
+                    }
+                }
 
                 columnViews.forEach { it.setupTextSize() }
             }
@@ -298,6 +312,13 @@ class BrowserMultiColumnAdapter(
         }
 
     companion object {
+        /**
+         * Layout weight of the first column relative to the others. The first column
+         * holds the sort field, which is normally a whole sentence, while the rest
+         * hold short values such as "Card 1" or a deck name.
+         */
+        private const val FIRST_COLUMN_WEIGHT = 2f
+
         private val mediaFilenameRegex = Regex("\uD83D\uDD09(.*?)\uD83D\uDD09") // 🔉(.*?)🔉
 
         /**

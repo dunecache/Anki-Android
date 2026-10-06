@@ -20,6 +20,7 @@ import android.view.SubMenu
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.LinearLayout
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -1077,7 +1078,7 @@ class CardBrowserFragment :
             browserColumnHeadings.removeAllViews()
 
             val layoutInflater = LayoutInflater.from(browserColumnHeadings.context)
-            for (column in columnCollection) {
+            for ((index, column) in columnCollection.withIndex()) {
                 Timber.d("setting up column %s", column)
                 val columnView = layoutInflater.inflate(R.layout.view_browser_column_heading, browserColumnHeadings, false) as TextView
 
@@ -1095,6 +1096,12 @@ class CardBrowserFragment :
                     val dialog = BrowserColumnSelectionFragment.createInstance(activityViewModel.cardsOrNotes)
                     dialog.show(parentFragmentManager, null)
                     true
+                }
+                // Match the row weighting: the first heading is twice as wide as the
+                // others, so the header tracks the columns under it.
+                (columnView.layoutParams as? LinearLayout.LayoutParams)?.let { params ->
+                    params.weight = if (index == 0) 2f else 1f
+                    columnView.layoutParams = params
                 }
                 browserColumnHeadings.addView(columnView)
             }
