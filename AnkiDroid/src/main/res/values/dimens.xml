@@ -74,6 +74,10 @@
     <dimen name="editor_selector_height">56dp</dimen>
     <dimen name="editor_row_height">56dp</dimen>
     <dimen name="editor_row_inset">16dp</dimen>
+    <dimen name="m3_counter_height">14dp</dimen>
+    <!-- Half the gap either side of the counter hairline, so the counters end up
+         at least 8dp apart without relying on their padding alone. -->
+    <dimen name="m3_counter_gap">4dp</dimen>
 
     <dimen name="mtrl_snackbar_background_corner_radius">8dp</dimen>
     <dimen name="popup_corner_radius">4dp</dimen>

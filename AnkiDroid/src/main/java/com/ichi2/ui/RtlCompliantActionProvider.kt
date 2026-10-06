@@ -43,6 +43,10 @@ class RtlCompliantActionProvider(
     override fun onCreateActionView(forItem: MenuItem): View {
         val actionView = ImageButton(context, null, android.R.attr.actionButtonStyle)
         actionView.setTooltipTextCompat(forItem.title)
+        // A tooltip is not announced by TalkBack, so without this the button is
+        // announced with no label at all. Used by undo/redo in the reviewer, in
+        // Study Options, and by the card browser's multiselect toolbar.
+        actionView.contentDescription = forItem.title
         forItem.icon?.let {
             it.isAutoMirrored = true
             actionView.setImageDrawable(it)
