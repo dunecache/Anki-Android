@@ -61,6 +61,34 @@
         <item name="deckLegendNewColor">?attr/deckNewCountColor</item>
         <item name="deckLegendLearnColor">?attr/deckLearnCountColor</item>
         <item name="deckLegendReviewColor">?attr/deckReviewCountColor</item>
+        <!-- Add note / Card Browser / Reviewer. Black's topBarColor is #000000,
+             where the shared count colours already clear AA
+             (5.71 / 6.02 / 8.88:1), so the counters map straight through. -->
+        <item name="reviewerNewCountColor">@color/material_blue_600</item>
+        <item name="reviewerLearnCountColor">@color/material_red_400</item>
+        <item name="reviewerReviewCountColor">@color/material_green_400</item>
+        <item name="reviewerBottomBarBackground">?attr/colorSurfaceContainer</item>
+        <!-- A filled *tonal* button, not a colorPrimary one: AnkiDroid's
+             colorPrimary is a light blue in this theme, so white on it measures
+             2.63:1 - well under AA. colorSurfaceContainerHighest with
+             colorOnSurface clears it comfortably. -->
+        <item name="reviewerShowAnswerBackground">?attr/colorSurfaceContainerHighest</item>
+        <item name="reviewerShowAnswerLabelColor">?attr/colorOnSurface</item>
+        <item name="reviewerEaseBackground">?attr/colorSurfaceContainerHigh</item>
+        <item name="reviewerEaseLabelColor">?attr/colorOnSurface</item>
+        <item name="reviewerEaseIntervalColor">?attr/colorOnSurfaceVariant</item>
+        <item name="editorFieldContainerColor">?attr/colorSurfaceContainerLow</item>
+        <item name="editorFieldStrokeColor">?attr/colorOutline</item>
+        <item name="editorFieldLabelColor">?attr/colorOnSurfaceVariant</item>
+        <item name="editorSelectorContainerColor">?attr/colorSurfaceContainerLow</item>
+        <item name="editorSelectorLabelColor">?attr/colorOnSurfaceVariant</item>
+        <item name="editorRowContainerColor">?attr/colorSurfaceContainerLow</item>
+        <item name="editorToolbarBackground">?attr/colorSurfaceContainer</item>
+        <item name="browserHeaderBackground">?attr/colorSurfaceContainer</item>
+        <item name="browserHeaderLabelColor">?attr/colorOnSurfaceVariant</item>
+        <item name="browserHeaderActiveColor">?attr/colorOnSurface</item>
+        <item name="browserRowDivider">?attr/colorOutlineVariant</item>
+        <item name="browserStateStrokeColor">?attr/colorOnSurfaceVariant</item>
         <!-- Study Screen colors -->
         <item name="showAnswerButtonBackground">#0c1215</item>
         <item name="showAnswerColor">@color/theme_black_primary</item>

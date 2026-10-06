@@ -61,6 +61,32 @@
         <item name="deckLegendNewColor">@color/black</item>
         <item name="deckLegendLearnColor">@color/black</item>
         <item name="deckLegendReviewColor">@color/black</item>
+        <!-- Add note / Card Browser / Reviewer. E-Ink is monochrome: every hue
+             role collapses to the single ink colour, and every "variant" role is
+             pinned to colorOnSurface so nothing depends on colour alone. The
+             field stroke is a mid grey so a container edge is still visible on
+             white paper. -->
+        <item name="reviewerNewCountColor">@color/black</item>
+        <item name="reviewerLearnCountColor">@color/black</item>
+        <item name="reviewerReviewCountColor">@color/black</item>
+        <item name="reviewerBottomBarBackground">@color/white</item>
+        <item name="reviewerShowAnswerBackground">@color/black</item>
+        <item name="reviewerShowAnswerLabelColor">@color/white</item>
+        <item name="reviewerEaseBackground">@color/white</item>
+        <item name="reviewerEaseLabelColor">@color/black</item>
+        <item name="reviewerEaseIntervalColor">@color/black</item>
+        <item name="editorFieldContainerColor">@color/white</item>
+        <item name="editorFieldStrokeColor">@color/material_grey_700</item>
+        <item name="editorFieldLabelColor">@color/black</item>
+        <item name="editorSelectorContainerColor">@color/white</item>
+        <item name="editorSelectorLabelColor">@color/black</item>
+        <item name="editorRowContainerColor">@color/white</item>
+        <item name="editorToolbarBackground">@color/white</item>
+        <item name="browserHeaderBackground">@color/white</item>
+        <item name="browserHeaderLabelColor">@color/black</item>
+        <item name="browserHeaderActiveColor">@color/black</item>
+        <item name="browserRowDivider">@color/black</item>
+        <item name="browserStateStrokeColor">@color/black</item>
 
         <item name="againButtonBackground">@color/white</item>
         <item name="hardButtonBackground">@color/white</item>

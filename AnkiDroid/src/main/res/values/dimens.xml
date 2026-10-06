@@ -53,6 +53,17 @@
     <dimen name="deck_header_legend_gap">4dp</dimen>
     <dimen name="deck_summary_margin_horizontal">8dp</dimen>
 
+    <!-- Material 3 shape, spacing and touch targets, shared by the note editor,
+         card browser and reviewer. Generic values only: nothing here is specific
+         to one screen, so these are deliberately not named after a screen. -->
+    <dimen name="m3_shape_corner_medium">12dp</dimen>
+    <dimen name="m3_shape_corner_large">16dp</dimen>
+    <dimen name="m3_shape_corner_full">28dp</dimen>
+    <dimen name="m3_touch_target_min">48dp</dimen>
+    <dimen name="m3_field_gap">12dp</dimen>
+    <dimen name="m3_screen_margin">16dp</dimen>
+    <dimen name="m3_divider_thickness">1dp</dimen>
+
     <dimen name="mtrl_snackbar_background_corner_radius">8dp</dimen>
     <dimen name="popup_corner_radius">4dp</dimen>
     <dimen name="dialog_corner_radius">8dp</dimen>

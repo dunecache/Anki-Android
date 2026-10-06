@@ -150,6 +150,39 @@
     <attr name="deckLegendNewColor" format="color"/>
     <attr name="deckLegendLearnColor" format="color"/>
     <attr name="deckLegendReviewColor" format="color"/>
+
+    <!-- ==================================================================
+         Add note / Card Browser / Reviewer. Screen-scoped roles, same
+         pattern as the deck list above: the shared card count colours are
+         read by StudyOptions and the browser card-state icons, so the
+         Reviewer gets its own three counters, checked against topBarColor.
+         ================================================================== -->
+    <!-- Reviewer study counters, drawn on ?attr/topBarColor.
+         The shared values miss AA there: learn 3.68:1 and review 3.79:1 in
+         Light, new 4.35:1 in Dark. -->
+    <attr name="reviewerNewCountColor" format="color"/>
+    <attr name="reviewerLearnCountColor" format="color"/>
+    <attr name="reviewerReviewCountColor" format="color"/>
+    <attr name="reviewerBottomBarBackground" format="color"/>
+    <attr name="reviewerShowAnswerBackground" format="color"/>
+    <attr name="reviewerShowAnswerLabelColor" format="color"/>
+    <attr name="reviewerEaseBackground" format="color"/>
+    <attr name="reviewerEaseLabelColor" format="color"/>
+    <attr name="reviewerEaseIntervalColor" format="color"/>
+    <!-- Note editor -->
+    <attr name="editorFieldContainerColor" format="color"/>
+    <attr name="editorFieldStrokeColor" format="color"/>
+    <attr name="editorFieldLabelColor" format="color"/>
+    <attr name="editorSelectorContainerColor" format="color"/>
+    <attr name="editorSelectorLabelColor" format="color"/>
+    <attr name="editorRowContainerColor" format="color"/>
+    <attr name="editorToolbarBackground" format="color"/>
+    <!-- Card browser -->
+    <attr name="browserHeaderBackground" format="color"/>
+    <attr name="browserHeaderLabelColor" format="color"/>
+    <attr name="browserHeaderActiveColor" format="color"/>
+    <attr name="browserRowDivider" format="color"/>
+    <attr name="browserStateStrokeColor" format="color"/>
     <!-- Study Screen button backgrounds -->
     <attr name="showAnswerButtonBackground" format="color"/>
     <attr name="answerButtonBackground" format="color"/>
