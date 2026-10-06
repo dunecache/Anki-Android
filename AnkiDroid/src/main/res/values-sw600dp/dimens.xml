@@ -14,4 +14,12 @@
     <dimen name="reviewer_side_margin">12dp</dimen>
     <dimen name="reviewer_answer_button_textSize">18sp</dimen>
     <dimen name="reviewer_mark_flag">24dp</dimen>
+    <!-- Note editor, card browser and reviewer: a tablet has room for a wider
+         margin and roomier inputs, and the reviewer's interval text can grow the
+         same way reviewer_answer_button_textSize already does. -->
+    <dimen name="m3_screen_margin">24dp</dimen>
+    <dimen name="m3_field_horizontal_padding">16dp</dimen>
+    <dimen name="editor_selector_height">64dp</dimen>
+    <dimen name="editor_row_height">64dp</dimen>
+    <dimen name="reviewer_next_time_textSize">16sp</dimen>
 </resources>
