@@ -23,11 +23,11 @@
     <ImageButton
         android:id="@+id/toggle_sticky"
         android:nextFocusForward="@id/media_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/m3_touch_target_min"
+        android:layout_height="@dimen/m3_touch_target_min"
         android:gravity="end|center_vertical"
+        android:padding="@dimen/m3_icon_button_padding"
         android:background="@drawable/ic_baseline_push_pin_24"
-        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toStartOf="@id/media_button"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -35,21 +35,22 @@
     <ImageButton
         android:id="@+id/media_button"
         android:nextFocusForward="@id/expand_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/m3_touch_target_min"
+        android:layout_height="@dimen/m3_touch_target_min"
         android:gravity="end|center_vertical"
+        android:padding="@dimen/m3_icon_button_padding"
         android:background="@drawable/ic_attachment"
         android:tooltipText="@string/multimedia_editor_attach_tooltip"
-        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toStartOf="@id/expand_button"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageButton
         android:id="@+id/expand_button"
         android:nextFocusForward="@id/edit_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/m3_touch_target_min"
+        android:layout_height="@dimen/m3_touch_target_min"
         android:gravity="end|center_vertical"
+        android:padding="@dimen/m3_icon_button_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:background="@drawable/ic_expand_less_black_24dp"/>

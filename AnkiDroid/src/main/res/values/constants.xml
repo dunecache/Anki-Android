@@ -23,6 +23,7 @@
          fails the build if it duplicates a backend translation. constants.xml is the
          file 12-dont-translate.xml points to for strings that cannot be translated.
          NEEDS OWNER DECISION: replace with backend TR strings once identified. -->
+    <string name="note_editor_field_expand">Expand or collapse field %1$s</string>
     <string name="deck_header_due_label">due today</string>
     <string name="deck_picker_legend_new">New</string>
     <string name="deck_picker_legend_learn">Learn</string>

@@ -58,6 +58,11 @@ class FieldEditLine : FrameLayout {
         }
         setExpanderBackgroundImage()
         binding.expandButton.setOnClickListener { toggleExpansionState() }
+        // The expand button had no content description at all, so it was announced
+        // as an unlabelled button. Set here as well as in the name setter so it is
+        // never empty, even before a field name has been assigned.
+        binding.expandButton.contentDescription =
+            context.getString(R.string.note_editor_field_expand, name.orEmpty())
         binding.editText.init()
         binding.label.setPaddingRelative(getDensityAdjustedValue(context, 3.4f).toInt(), 0, 0, 0)
     }
@@ -116,6 +121,8 @@ class FieldEditLine : FrameLayout {
             _name = name
             binding.editText.contentDescription = name
             binding.label.text = name
+            binding.expandButton.contentDescription =
+                context.getString(R.string.note_editor_field_expand, name.orEmpty())
         }
 
     val lastViewInTabOrder: View
