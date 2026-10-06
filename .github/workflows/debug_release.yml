@@ -1,0 +1,213 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+# Debug APK release.
+#
+# Builds a debug-signed APK of the `full` flavor and attaches it to a GitHub
+# Release, so a build can be installed and tried on a real device without a local
+# Android SDK.
+#
+# This is deliberately NOT a copy of publish.yml. publish.yml runs
+# tools/release.sh, which publishes to Google Play with the maintainers'
+# production signing key and store credentials. This workflow:
+#
+#   * uses the `debug` build type, so the standard Android debug keystore signs
+#     it - no production keystore is involved and no secret is needed;
+#   * never contacts Google Play or Amazon;
+#   * never commits, tags or pushes to a branch;
+#   * publishes as a prerelease, and as a draft unless you opt out.
+#
+# A debug build has applicationId com.ichi2.anki.debug, so it installs alongside
+# a real AnkiDroid install and keeps its own data.
+
+name: "\U0001F9EA Debug APK Release"
+
+on:
+  workflow_dispatch:
+    inputs:
+      flavor:
+        description: "Flavor to build. 'full' is the unrestricted one distributed on GitHub/F-Droid."
+        required: false
+        default: "full"
+        type: choice
+        options:
+          - full
+          - play
+          - amazon
+      all_apis:
+        description: "Upload every per-ABI APK as well as the universal one."
+        required: false
+        default: false
+        type: boolean
+      draft:
+        description: "Create as a draft, keeping the release invisible until you publish it yourself."
+        required: false
+        default: true
+        type: boolean
+      notes:
+        description: "Extra notes to add to the release description."
+        required: false
+        default: ""
+        type: string
+
+# Only ever create releases in a fork. On upstream this would add prerelease tags
+# to a repository whose tags drive real store releases, so refuse.
+permissions:
+  contents: write
+
+concurrency:
+  group: debug-apk-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release_debug_apk:
+    name: "Build and attach a debug APK"
+    if: github.repository != 'ankidroid/Anki-Android'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Configure JDK
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: "jetbrains"
+          java-version: "21"
+
+      - uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+        with:
+          cache-provider: basic
+
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2c52a9 # v6.1.0
+        name: Gradle Cache
+        with:
+          path: ~/.gradle/caches
+          key: debug-apk-${{ hashFiles('**/*.gradle*') }}-v1
+
+      # AGP can auto-download a missing platform, but doing it explicitly means a
+      # missing sdkmanager fails here with a readable message rather than deep
+      # inside the Gradle build.
+      - name: Install the compileSdk platform
+        run: |
+          set -euo pipefail
+          COMPILE_SDK=$(sed -n 's/^compileSdk = "\(.*\)"/\1/p' gradle/libs.versions.toml)
+          if [ -z "$COMPILE_SDK" ]; then
+            echo "Could not read compileSdk from gradle/libs.versions.toml"; exit 1
+          fi
+          echo "compileSdk is $COMPILE_SDK"
+          SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-}}"
+          SDKMANAGER="$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager"
+          if [ ! -x "$SDKMANAGER" ]; then
+            SDKMANAGER=$(command -v sdkmanager)
+          fi
+          yes | "$SDKMANAGER" --install "platforms;android-$COMPILE_SDK" > /dev/null
+
+      # The `debug` build type always builds a universal APK alongside the per-ABI
+      # ones (splits.abi.isUniversalApk in AnkiDroid/build.gradle.kts), so no
+      # -Duniversal-apk flag is needed. Unlike release.sh this passes no
+      # publishing task and no keystore environment variables.
+      - name: Assemble the debug APK
+        env:
+          FLAVOR: ${{ inputs.flavor }}
+        run: |
+          set -euo pipefail
+          # Gradle build types capitalise the flavour: full -> Full, play -> Play.
+          TASK_FLAVOR="$(printf '%s' "${FLAVOR:0:1}" | tr '[:lower:]' '[:upper:]')${FLAVOR:1}"
+          echo "assemble${TASK_FLAVOR}Debug"
+          ./gradlew --stop
+          ./gradlew ":AnkiDroid:assemble${TASK_FLAVOR}Debug" \
+            -PbuildTime="$(date +%s000)" \
+            --console=plain
+
+      - name: Collect APKs
+        env:
+          FLAVOR: ${{ inputs.flavor }}
+        run: |
+          set -euo pipefail
+          SRC="AnkiDroid/build/outputs/apk/$FLAVOR/debug"
+          if [ ! -d "$SRC" ]; then
+            echo "No APK output directory at $SRC"; exit 1
+          fi
+          mkdir -p dist
+          cp "$SRC"/*.apk dist/
+          ls -l dist/
+
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FLAVOR: ${{ inputs.flavor }}
+          ALL_APIS: ${{ inputs.all_apis }}
+          DRAFT: ${{ inputs.draft }}
+          EXTRA_NOTES: ${{ inputs.notes }}
+        run: |
+          set -euo pipefail
+
+          # versionName is read the same way tools/release.sh reads it, so the tag
+          # matches the version the APK itself reports.
+          VERSION=$(sed -n 's/.*versionName = "\(.*\)"/\1/p' AnkiDroid/build.gradle.kts | head -1)
+          if [ -z "$VERSION" ]; then
+            echo "Could not read versionName from AnkiDroid/build.gradle.kts"; exit 1
+          fi
+
+          SHA=$(git rev-parse HEAD)
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          TAG="debug-$VERSION-r${{ github.run_number }}-$SHORT_SHA"
+          TITLE="AnkiDroid $VERSION-debug (${{ github.ref_name }}, $SHORT_SHA)"
+
+          # Quoted heredoc: the notes contain backticks, which an unquoted
+          # heredoc would treat as command substitution. ${{ }} substitution by the
+          # runner happens before the shell sees the text either way.
+          cat > release-notes.md <<'EOF'
+          :warning: **Debug build. Not for distribution.**
+
+          :warning: **This is a fork-local debug release**, produced by
+          `.github/workflows/debug_release.yml`. It is not an official AnkiDroid release.
+
+          * Signed with the standard Android **debug** keystore, so it cannot be
+            installed over, or replace, a store build.
+          * `applicationId` is `com.ichi2.anki.debug`, so it installs alongside a real
+            AnkiDroid and keeps its own data.
+          * Debuggable and not minified.
+          EOF
+
+          {
+            echo
+            echo "Built from \`${{ github.ref_name }}\` at \`$SHORT_SHA\` (workflow run #${{ github.run_number }})."
+            if [ -n "$EXTRA_NOTES" ]; then
+              echo
+              echo "$EXTRA_NOTES"
+            fi
+          } >> release-notes.md
+
+          ARGS=(--prerelease --target "$SHA" --title "$TITLE" --notes-file release-notes.md)
+          if [ "$DRAFT" = "true" ]; then
+            ARGS+=(--draft)
+          fi
+
+          # The release must exist before assets can be attached to it.
+          gh release create "$TAG" "${ARGS[@]}"
+
+          # Always the universal APK. Fall back to arm64 if the build did not
+          # produce one, so the release never ends up with no asset at all.
+          if UNIVERSAL=$(ls dist/*-universal-*.apk 2>/dev/null | head -1) && [ -n "$UNIVERSAL" ]; then
+            echo "Attaching $UNIVERSAL"
+            gh release upload "$TAG" "$UNIVERSAL"
+          elif ARM64=$(ls dist/*arm64-v8a*.apk 2>/dev/null | head -1) && [ -n "$ARM64" ]; then
+            echo "No universal APK; attaching $ARM64"
+            gh release upload "$TAG" "$ARM64"
+          else
+            echo "No suitable APK found in dist/"; exit 1
+          fi
+
+          if [ "$ALL_APIS" = "true" ]; then
+            for apk in dist/*.apk; do
+              case "$apk" in
+                *-universal-*) ;;
+                *) echo "Attaching $apk"; gh release upload "$TAG" "$apk" ;;
+              esac
+            done
+          fi
+
+          echo
+          gh release view "$TAG" --json url,isDraft,isPrerelease \
+            --jq '"url: \(.url)  draft: \(.isDraft)  prerelease: \(.isPrerelease)"'
+          echo "Done: $TAG"
