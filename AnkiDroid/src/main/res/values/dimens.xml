@@ -42,7 +42,7 @@
     <dimen name="deck_nested_indent">20dp</dimen>
     <!-- Fixed count cell. A fixed width plus end gravity is what makes the three
          columns line up on every row regardless of how many digits each holds. -->
-    <dimen name="deck_counts_cell_width">32dp</dimen>
+    <dimen name="deck_counts_cell_width">40dp</dimen>
     <dimen name="deck_counts_pill_padding_horizontal">6dp</dimen>
     <dimen name="deck_counts_pill_margin">2dp</dimen>
     <dimen name="deck_counts_pill_corner_radius">12dp</dimen>
@@ -51,6 +51,7 @@
     <dimen name="deck_header_padding_vertical">12dp</dimen>
     <dimen name="deck_header_legend_dot">8dp</dimen>
     <dimen name="deck_header_legend_gap">4dp</dimen>
+    <dimen name="deck_summary_margin_horizontal">8dp</dimen>
 
     <dimen name="mtrl_snackbar_background_corner_radius">8dp</dimen>
     <dimen name="popup_corner_radius">4dp</dimen>

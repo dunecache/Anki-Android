@@ -9,7 +9,7 @@
     <dimen name="deck_picker_right_padding">12dp</dimen>
     <!-- The tablet split pane is wide enough for roomier grouping and count cells. -->
     <dimen name="deck_group_side_margin">16dp</dimen>
-    <dimen name="deck_counts_cell_width">40dp</dimen>
+    <dimen name="deck_counts_cell_width">48dp</dimen>
     <dimen name="deck_nested_indent">28dp</dimen>
     <dimen name="reviewer_side_margin">12dp</dimen>
     <dimen name="reviewer_answer_button_textSize">18sp</dimen>
