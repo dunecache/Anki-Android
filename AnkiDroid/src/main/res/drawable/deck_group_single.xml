@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+  -->
+<!-- Material 3 deck list group container: a row that is alone in its group.
+     All four corners are rounded. The fill is a theme role so it follows every
+     AnkiDroid theme; the radius is a dimen so the group shape stays in step with
+     the spacing values. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="?attr/deckGroupBackground" />
+    <corners android:radius="@dimen/deck_group_corner_radius" />
+</shape>

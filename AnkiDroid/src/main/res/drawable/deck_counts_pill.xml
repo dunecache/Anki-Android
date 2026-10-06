@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+  -->
+<!-- Tonal pill behind the deck row's counts zone.
+     The counts zone is the row's second tap target (it opens the deck overview),
+     and previously had no resting affordance at all: only a ripple. This gives it
+     a persistent tonal surface so it reads as its own target.
+     The fill is a theme role so it follows every AnkiDroid theme. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="?attr/deckCountsBackground" />
+    <corners android:radius="@dimen/deck_counts_pill_corner_radius" />
+</shape>
