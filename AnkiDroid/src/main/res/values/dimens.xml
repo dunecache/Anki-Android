@@ -36,6 +36,10 @@
     <dimen name="deck_group_row_gap">2dp</dimen>
     <dimen name="deck_group_side_margin">8dp</dimen>
     <dimen name="deck_group_min_height">56dp</dimen>
+    <!-- Per-depth indent for the deck list. Wider than keyline_1 (16dp) so nesting is
+         readable at a glance. keyline_1 itself is left alone: the note editor uses it
+         too. DeckAdapter and DeckHierarchyLinesDecoration both read this one. -->
+    <dimen name="deck_nested_indent">20dp</dimen>
     <!-- Fixed count cell. A fixed width plus end gravity is what makes the three
          columns line up on every row regardless of how many digits each holds. -->
     <dimen name="deck_counts_cell_width">32dp</dimen>

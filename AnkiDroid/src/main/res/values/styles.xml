@@ -235,6 +235,13 @@
 
     <style name="TextAppearance.AnkiDroid.TopAppBar.Subtitle" parent="TextAppearance.Material3.ActionBar.Subtitle" />
 
+    <!-- Deck list type roles. A top-level deck name uses the title role; a subdeck name
+         uses the body role, so hierarchy comes from type role and colour rather than
+         from an indented flat strip. Applied by DeckAdapter according to the node depth. -->
+    <style name="TextAppearance.AnkiDroid.DeckGroupTitle" parent="TextAppearance.Material3.TitleMedium" />
+
+    <style name="TextAppearance.AnkiDroid.DeckGroupSubtitle" parent="TextAppearance.Material3.BodyLarge" />
+
     <style name="AnkiDroid.AlertDialog.Body.Text" parent="MaterialAlertDialog.Material3.Body.Text">
         <!-- The default style uses onSurfaceVariant, which isn't defined yet -->
         <item name="android:textColor">?android:attr/textColor</item>

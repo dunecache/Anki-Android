@@ -51,8 +51,10 @@ class DeckHierarchyLinesDecoration(
     private val targetAlpha = if (systemIsInNightMode(context)) ALPHA_DARK else ALPHA_LIGHT
     private val layerPaint = Paint().apply { alpha = targetAlpha }
 
-    // The horizontal indent spacing between each depth level
-    private val nestedIndent = context.resources.getDimension(R.dimen.keyline_1)
+    // The horizontal indent spacing between each depth level.
+    // Must be the same value DeckAdapter indents by (deck_nested_indent), or the
+    // elbow lines would not line up with the rows they belong to.
+    private val nestedIndent = context.resources.getDimension(R.dimen.deck_nested_indent)
 
     // The offset to center the vertical lines with the expander chevron
     private val expanderCenterOffset = adapter.expanderWidth / 2f

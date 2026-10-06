@@ -53,8 +53,9 @@ class DeckAdapter(
     private val learnCountColor: Int
     private val reviewCountColor: Int
     private val rowCurrentDrawable: Int
-    private val deckNameDefaultColor: Int
     private val deckNameDynColor: Int
+    private val deckGroupTitleColor: Int
+    private val deckGroupSubtitleColor: Int
     private val expandImage: Drawable
     private val collapseImage: Drawable
 
@@ -67,7 +68,7 @@ class DeckAdapter(
     val startPaddingSmall: Int = context.resources.getDimension(R.dimen.deck_picker_left_padding_small).toInt()
 
     /** Padding to apply for each depth level of a deck */
-    val nestedIndent = context.resources.getDimension(R.dimen.keyline_1).toInt()
+    val nestedIndent = context.resources.getDimension(R.dimen.deck_nested_indent).toInt()
 
     /** The width of the expander chevron icon */
     val expanderWidth = 48.dp.toPx(context)
@@ -92,7 +93,15 @@ class DeckAdapter(
 
     class ViewHolder(
         val binding: ItemDeckBinding,
-    ) : RecyclerView.ViewHolder(binding.root)
+    ) : RecyclerView.ViewHolder(binding.root) {
+        /**
+         * Which deck-name type role this holder last applied.
+         *
+         * `TextView.setTextAppearance` resolves a style on every call, so it is only
+         * invoked when the row's role actually changes rather than on every bind.
+         */
+        var appliedDeckNameRole: Int = NO_DECK_NAME_ROLE
+    }
 
     /**
      * Set new data in the adapter. This should be used instead of [submitList] (which is called
@@ -131,6 +140,10 @@ class DeckAdapter(
     ) {
         val binding = holder.binding
         val node = getItem(position)
+        // Material 3 grouping: the row's rounded container is chosen from its position
+        // within its group. currentList is already materialised by ListAdapter, so these
+        // are two comparisons and no allocation per bind.
+        binding.deckGroupBackground.setBackgroundResource(groupShapeAt(position, node.depth))
         // Set the expander icon and padding according to whether or not there are any subdecks
         if (hasSubdecks) {
             binding.deckLayout.setPaddingRelative(startPaddingSmall, 0, endPadding, 0)
@@ -163,9 +176,27 @@ class DeckAdapter(
         } else {
             holder.binding.deckLayout.setBackgroundResource(selectableItemBackground)
         }
-        // Set deck name and colour. Filtered decks have their own colour
+        // Set deck name and colour. Filtered decks have their own colour.
+        // A top-level deck uses the title type role; a subdeck uses the body role, so
+        // the hierarchy reads from type and colour rather than from a flat indented strip.
+        val deckNameRole =
+            if (node.depth == 0) {
+                R.style.TextAppearance_AnkiDroid_DeckGroupTitle
+            } else {
+                R.style.TextAppearance_AnkiDroid_DeckGroupSubtitle
+            }
+        if (holder.appliedDeckNameRole != deckNameRole) {
+            binding.deckName.setTextAppearance(deckNameRole)
+            holder.appliedDeckNameRole = deckNameRole
+        }
         binding.deckName.text = node.lastDeckNameComponent
-        binding.deckName.setTextColor(if (node.filtered) deckNameDynColor else deckNameDefaultColor)
+        binding.deckName.setTextColor(
+            when {
+                node.filtered -> deckNameDynColor
+                node.depth == 0 -> deckGroupTitleColor
+                else -> deckGroupSubtitleColor
+            },
+        )
 
         // Set the card counts and their colors
         binding.deckNew.text = node.newCount.toString()
@@ -192,6 +223,28 @@ class DeckAdapter(
             } else {
                 false
             }
+        }
+    }
+
+    /**
+     * The group container shape for the row at [position] with nesting [depth].
+     *
+     * A row is the start of its group when the row above it sits at a shallower depth,
+     * and the end when the row below it does. Comparing depths is enough because the
+     * list is a pre-order flattening of the deck tree.
+     */
+    private fun groupShapeAt(
+        position: Int,
+        depth: Int,
+    ): Int {
+        val list = currentList
+        val isFirst = position == 0 || list[position - 1].depth < depth
+        val isLast = position == list.lastIndex || list[position + 1].depth < depth
+        return when {
+            isFirst && isLast -> R.drawable.deck_group_single
+            isFirst -> R.drawable.deck_group_top
+            isLast -> R.drawable.deck_group_bottom
+            else -> R.drawable.deck_group_middle
         }
     }
 
@@ -227,6 +280,9 @@ class DeckAdapter(
     companion object {
         // Make the selected deck roughly half transparent if there is a background
         private const val SELECTED_DECK_ALPHA_AGAINST_BACKGROUND = 0.45
+
+        /** Sentinel for ViewHolder.appliedDeckNameRole: no role applied yet. */
+        private const val NO_DECK_NAME_ROLE = -1
     }
 
     init {
@@ -243,10 +299,11 @@ class DeckAdapter(
                 R.attr.deckLearnCountColor,
                 R.attr.deckReviewCountColor,
                 R.attr.currentDeckBackground,
-                android.R.attr.textColor,
                 R.attr.dynDeckColor,
                 R.attr.expandRef,
                 R.attr.collapseRef,
+                R.attr.deckGroupTitleColor,
+                R.attr.deckGroupSubtitleColor,
             )
         val ta = context.obtainStyledAttributes(attrs)
         zeroCountColor = ta.getColor(0, context.getColor(R.color.black))
@@ -254,12 +311,13 @@ class DeckAdapter(
         learnCountColor = ta.getColor(2, context.getColor(R.color.black))
         reviewCountColor = ta.getColor(3, context.getColor(R.color.black))
         rowCurrentDrawable = ta.getResourceId(4, 0)
-        deckNameDefaultColor = ta.getColor(5, context.getColor(R.color.black))
-        deckNameDynColor = ta.getColor(6, context.getColor(CommonR.color.material_blue_A700))
-        expandImage = ta.getDrawableOrThrow(7)
+        deckNameDynColor = ta.getColor(5, context.getColor(CommonR.color.material_blue_A700))
+        expandImage = ta.getDrawableOrThrow(6)
         expandImage.isAutoMirrored = true
-        collapseImage = ta.getDrawableOrThrow(8)
+        collapseImage = ta.getDrawableOrThrow(7)
         collapseImage.isAutoMirrored = true
+        deckGroupTitleColor = ta.getColor(8, context.getColor(R.color.black))
+        deckGroupSubtitleColor = ta.getColor(9, context.getColor(R.color.black))
         ta.recycle()
         context.withStyledAttributes(attrs = intArrayOf(android.R.attr.selectableItemBackground)) {
             selectableItemBackground = ta.getResourceId(0, 0)
