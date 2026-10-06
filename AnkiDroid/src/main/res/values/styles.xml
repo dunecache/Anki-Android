@@ -56,7 +56,11 @@
         <item name="android:ellipsize">marquee</item>
         <item name="android:gravity">bottom|center_horizontal</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textSize">12sp</item>
+        <!-- Raised from 12sp: this is the interval the user reads to decide an
+             ease, and it was the smallest text on the screen. FooterButtonEaseTextBase
+             overrides this back to 14sp for the ease labels themselves, so only the
+             interval grows. -->
+        <item name="android:textSize">@dimen/reviewer_next_time_textSize</item>
     </style>
 
     <style name="FooterButtonEaseTextBase" parent="FooterButtonNextTime">
