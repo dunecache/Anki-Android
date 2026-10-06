@@ -71,6 +71,9 @@
     <dimen name="m3_field_list_inset">6dp</dimen>
     <!-- (48dp target - 24dp icon) / 2, so the icon stays optically centred. -->
     <dimen name="m3_icon_button_padding">12dp</dimen>
+    <dimen name="editor_selector_height">56dp</dimen>
+    <dimen name="editor_row_height">56dp</dimen>
+    <dimen name="editor_row_inset">16dp</dimen>
 
     <dimen name="mtrl_snackbar_background_corner_radius">8dp</dimen>
     <dimen name="popup_corner_radius">4dp</dimen>

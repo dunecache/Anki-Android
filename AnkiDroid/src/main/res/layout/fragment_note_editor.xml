@@ -31,16 +31,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="8dip"
-                    android:layout_marginRight="8dip"
+                    android:layout_marginStart="@dimen/m3_screen_margin"
+                    android:layout_marginEnd="@dimen/deck_group_row_gap"
                     android:clickable="false"
                     android:gravity="start|center_vertical"
+                    android:textColor="?attr/editorSelectorLabelColor"
                     android:textStyle="bold"
                     android:text="@string/CardEditorModel" />
                 <Spinner
                     android:id="@+id/note_type_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="?minTouchTargetSize"
+                    android:layout_height="@dimen/editor_selector_height"
+                    android:layout_marginEnd="@dimen/m3_screen_margin"
+                    android:background="@drawable/editor_selector_container"
+                    android:paddingStart="@dimen/m3_field_horizontal_padding"
+                    android:paddingEnd="@dimen/m3_field_horizontal_padding"
                     />
             </LinearLayout>
 
@@ -54,22 +59,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="8dip"
-                    android:layout_marginRight="8dip"
+                    android:layout_marginStart="@dimen/m3_screen_margin"
+                    android:layout_marginEnd="@dimen/deck_group_row_gap"
                     android:clickable="false"
                     android:gravity="start|center_vertical"
+                    android:textColor="?attr/editorSelectorLabelColor"
                     android:textStyle="bold"
                     android:text="@string/CardEditorNoteDeck" />
-                <!-- different horizontal padding to match note_type_spinner drop down alignment -->
+                <!-- The dropdown arrow was already present (drawableEnd); it is kept.
+                     The leading padding matches the note type spinner so the two
+                     controls' text starts on the same line. -->
                 <com.ichi2.ui.FixedTextView
                     android:id="@+id/note_deck_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="12dp"
+                    android:layout_height="@dimen/editor_selector_height"
+                    android:layout_marginEnd="@dimen/m3_screen_margin"
+                    android:paddingStart="@dimen/m3_field_horizontal_padding"
+                    android:paddingEnd="@dimen/m3_field_horizontal_padding"
                     android:drawableEnd="@drawable/id_arrow_drop_down"
-                    android:background="?attr/selectableItemBackground"
-                    android:minHeight="?attr/listPreferredItemHeightSmall"
+                    android:drawablePadding="@dimen/deck_group_row_gap"
+                    android:background="@drawable/editor_selector_container"
                     android:gravity="center_vertical"
                     tools:text="Deck name here"
                     />
@@ -150,33 +159,44 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <!-- M3 list-style row. The text is whatever updateTags()/updateCards()
+                 put here, which NoteEditorTest asserts on, so it is left alone. -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/CardEditorTagButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/editor_row_height"
                 tools:text="Tags: AnkiDroid"
                 android:gravity="start|center_vertical"
-                android:paddingStart="15dip"
-                android:paddingEnd="15dip"
-                android:elevation="50dip"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/button_background"/>
+                android:paddingStart="@dimen/editor_row_inset"
+                android:paddingEnd="@dimen/editor_row_inset"
+                android:layout_marginStart="@dimen/m3_screen_margin"
+                android:layout_marginEnd="@dimen/m3_screen_margin"
+                android:layout_marginBottom="@dimen/m3_field_gap"
+                android:stateListAnimator="@null"
+                android:textColor="?attr/editorFieldLabelColor"
+                android:background="@drawable/editor_row_container" />
+            <!-- M3 list-style row. The text is whatever updateTags()/updateCards()
+                 put here, which NoteEditorTest asserts on, so it is left alone. -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/CardEditorCardsButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/editor_row_height"
                 tools:text="Cards: Card 1"
                 android:gravity="start|center_vertical"
-                android:paddingStart="15dip"
-                android:paddingEnd="15dip"
-                android:elevation="50dip"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/button_background"/>
+                android:paddingStart="@dimen/editor_row_inset"
+                android:paddingEnd="@dimen/editor_row_inset"
+                android:layout_marginStart="@dimen/m3_screen_margin"
+                android:layout_marginEnd="@dimen/m3_screen_margin"
+                android:layout_marginBottom="@dimen/m3_field_gap"
+                android:stateListAnimator="@null"
+                android:textColor="?attr/editorFieldLabelColor"
+                android:background="@drawable/editor_row_container" />
         </LinearLayout>
     </ScrollView>
     <com.ichi2.anki.noteeditor.Toolbar
         android:layout_gravity="bottom"
         android:id="@+id/editor_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@drawable/editor_toolbar_background"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

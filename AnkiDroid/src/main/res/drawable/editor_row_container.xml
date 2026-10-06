@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+  -->
+<!-- Material 3 list-style row for the editor's Tags and Cards buttons.
+
+     Replaces a hand-rolled two-layer fake shadow. The button's own press
+     feedback still applies on top, so interaction is unchanged. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="?attr/editorRowContainerColor" />
+    <stroke
+        android:width="@dimen/m3_stroke_thin"
+        android:color="?attr/editorFieldStrokeColor" />
+    <corners android:radius="@dimen/m3_shape_corner_medium" />
+</shape>

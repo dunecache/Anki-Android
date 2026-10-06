@@ -150,13 +150,14 @@
         <item name="textAppearanceLabelLarge">@style/TextAppearance.Material3.LabelLarge</item>
     </style>
 
-    <!-- padding is hardcoded in Toolbar.java (32) to allow for fixing the scrollview -->
+    <!-- 48dp so each formatting button is a real touch target. Toolbar.kt computes
+         its row width with a hard-coded 48.dp per item, so this also brings the
+         declared size back in line with the arithmetic that has always assumed it. -->
     <style name="note_editor_toolbar_button">
-        <item name="android:layout_width">44dp</item>
-        <item name="android:layout_height">44dp</item>
-        <item name="android:padding">2dp</item>
+        <item name="android:layout_width">@dimen/m3_touch_target_min</item>
+        <item name="android:layout_height">@dimen/m3_touch_target_min</item>
+        <item name="android:padding">@dimen/m3_icon_button_padding</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
-        <item name="android:tint">@color/black</item>
     </style>
 
     <style name="reviewer_whiteboard_editor_button_style">
