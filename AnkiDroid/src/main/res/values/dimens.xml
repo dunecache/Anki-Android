@@ -76,6 +76,7 @@
     <dimen name="m3_counter_height">14dp</dimen>
     <!-- Half the gap either side of the counter hairline, so the counters end up
          at least 8dp apart without relying on their padding alone. -->
+    <dimen name="m3_legend_label_size">10sp</dimen>
     <dimen name="m3_counter_gap">4dp</dimen>
     <dimen name="reviewer_next_time_textSize">14sp</dimen>
 

@@ -122,4 +122,72 @@
             android:visibility="invisible"
             tools:visibility="visible"
             />
+
+    <!-- Which colour is which count. The counters are bare digits, so without this a
+         reader who cannot distinguish the hues has no way to tell New from Learn from
+         Due. The key dots repeat the counter colours exactly, so the legend can never
+         drift from what it explains.
+
+         The labels reuse deck_picker_legend_*, the same strings the deck list uses for
+         its own column headers, rather than adding a second untranslated string for the
+         same three words. deckHeaderLabelColor is reused for the same reason: it is
+         already resolved per theme, including theme_eink, which deliberately maps it to
+         colorOnSurface for monochrome output.
+
+         importantForAccessibility="no": decorative only. The counts announce their own
+         meaning through their content descriptions, so exposing the legend as well would
+         make TalkBack read the queue names twice. -->
+    <LinearLayout
+        android:id="@+id/counter_legend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/review_number"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:importantForAccessibility="no">
+
+        <View
+            android:layout_width="@dimen/deck_header_legend_dot"
+            android:layout_height="@dimen/deck_header_legend_dot"
+            android:background="@drawable/deck_legend_key"
+            android:backgroundTint="?attr/reviewerNewCountColor" />
+
+        <com.ichi2.ui.FixedTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/deck_header_legend_gap"
+            android:text="@string/deck_picker_legend_new"
+            android:textColor="?attr/deckHeaderLabelColor"
+            android:textSize="@dimen/m3_legend_label_size" />
+
+        <View
+            android:layout_width="@dimen/deck_header_legend_dot"
+            android:layout_height="@dimen/deck_header_legend_dot"
+            android:layout_marginStart="@dimen/deck_header_padding_horizontal"
+            android:background="@drawable/deck_legend_key"
+            android:backgroundTint="?attr/reviewerLearnCountColor" />
+
+        <com.ichi2.ui.FixedTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/deck_header_legend_gap"
+            android:text="@string/deck_picker_legend_learn"
+            android:textColor="?attr/deckHeaderLabelColor"
+            android:textSize="@dimen/m3_legend_label_size" />
+
+        <View
+            android:layout_width="@dimen/deck_header_legend_dot"
+            android:layout_height="@dimen/deck_header_legend_dot"
+            android:layout_marginStart="@dimen/deck_header_padding_horizontal"
+            android:background="@drawable/deck_legend_key"
+            android:backgroundTint="?attr/reviewerReviewCountColor" />
+
+        <com.ichi2.ui.FixedTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/deck_header_legend_gap"
+            android:text="@string/deck_picker_legend_review"
+            android:textColor="?attr/deckHeaderLabelColor"
+            android:textSize="@dimen/m3_legend_label_size" />
+    </LinearLayout>
 </RelativeLayout>
