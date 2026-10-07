@@ -2601,13 +2601,17 @@ class NoteEditorFragment :
         if (selectedTags == null) {
             selectedTags = ArrayList(0)
         }
+        val tags =
+            getColUnsafe.tags
+                .join(getColUnsafe.tags.canonify(selectedTags!!))
+                .trim()
+                .replace(" ", ", ")
         tagsButton!!.text =
             resources.getString(
                 CommonString.CardEditorTags,
-                getColUnsafe.tags
-                    .join(getColUnsafe.tags.canonify(selectedTags!!))
-                    .trim()
-                    .replace(" ", ", "),
+                // An empty list used to leave the row reading as the bare label
+                // "Tags: ", which looked like a rendering failure.
+                tags.ifEmpty { resources.getString(CommonString.note_editor_tags_none) },
             )
     }
 
