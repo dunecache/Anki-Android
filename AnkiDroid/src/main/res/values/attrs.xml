@@ -133,22 +133,22 @@
          values must not change. These Home-screen-scoped variants exist because the deck
          list draws counts on colorSurfaceContainer / colorSurfaceContainerHigh, and the
          shared values do not reach WCAG AA on those surfaces. -->
-    <attr name="deckNewCountColor" format="color"/>
-    <attr name="deckLearnCountColor" format="color"/>
-    <attr name="deckReviewCountColor" format="color"/>
-    <attr name="deckZeroCountColor" format="color"/>
+    <attr name="deckNewCountColor" format="color">#1F4D6F</attr>
+    <attr name="deckLearnCountColor" format="color">#BE2A25</attr>
+    <attr name="deckReviewCountColor" format="color">#2F6626</attr>
+    <attr name="deckZeroCountColor" format="color">#67635A</attr>
     <!-- Material 3 grouping for the deck list: one rounded container per top-level
          deck and its descendants, plus a tonal pill behind the counts tap zone. -->
-    <attr name="deckGroupBackground" format="color"/>
-    <attr name="deckGroupTitleColor" format="color"/>
-    <attr name="deckGroupSubtitleColor" format="color"/>
-    <attr name="deckCountsBackground" format="color"/>
-    <attr name="deckHeaderDueColor" format="color"/>
-    <attr name="deckHeaderLabelColor" format="color"/>
-    <attr name="deckSummaryTextColor" format="color"/>
-    <attr name="deckLegendNewColor" format="color"/>
-    <attr name="deckLegendLearnColor" format="color"/>
-    <attr name="deckLegendReviewColor" format="color"/>
+    <attr name="deckGroupBackground" format="color">#F0EEE6</attr>
+    <attr name="deckGroupTitleColor" format="color">#1F1E1D</attr>
+    <attr name="deckGroupSubtitleColor" format="color">#5F6368</attr>
+    <attr name="deckCountsBackground" format="color">#E8E5DA</attr>
+    <attr name="deckHeaderDueColor" format="color">#1F1E1D</attr>
+    <attr name="deckHeaderLabelColor" format="color">#5F6368</attr>
+    <attr name="deckSummaryTextColor" format="color">#5F6368</attr>
+    <attr name="deckLegendNewColor" format="color">#1F4D6F</attr>
+    <attr name="deckLegendLearnColor" format="color">#BE2A25</attr>
+    <attr name="deckLegendReviewColor" format="color">#2F6626</attr>
 
     <!-- ==================================================================
          Add note / Card Browser / Reviewer. Screen-scoped roles, same
@@ -159,22 +159,22 @@
     <!-- Reviewer study counters, drawn on ?attr/topBarColor.
          The shared values miss AA there: learn 3.68:1 and review 3.79:1 in
          Light, new 4.35:1 in Dark. -->
-    <attr name="reviewerNewCountColor" format="color"/>
-    <attr name="reviewerLearnCountColor" format="color"/>
-    <attr name="reviewerReviewCountColor" format="color"/>
-    <attr name="reviewerShowAnswerBackground" format="color"/>
-    <attr name="reviewerShowAnswerLabelColor" format="color"/>
+    <attr name="reviewerNewCountColor" format="color">#1F4D6F</attr>
+    <attr name="reviewerLearnCountColor" format="color">#BE2A25</attr>
+    <attr name="reviewerReviewCountColor" format="color">#2F6626</attr>
+    <attr name="reviewerShowAnswerBackground" format="color">#DFDBCE</attr>
+    <attr name="reviewerShowAnswerLabelColor" format="color">#1F1E1D</attr>
     <!-- Note editor -->
-    <attr name="editorFieldContainerColor" format="color"/>
-    <attr name="editorFieldStrokeColor" format="color"/>
-    <attr name="editorFieldLabelColor" format="color"/>
-    <attr name="editorSelectorContainerColor" format="color"/>
-    <attr name="editorSelectorLabelColor" format="color"/>
-    <attr name="editorRowContainerColor" format="color"/>
-    <attr name="editorToolbarBackground" format="color"/>
+    <attr name="editorFieldContainerColor" format="color">#FFFFFF</attr>
+    <attr name="editorFieldStrokeColor" format="color">#BDBDBD</attr>
+    <attr name="editorFieldLabelColor" format="color">#5F6368</attr>
+    <attr name="editorSelectorContainerColor" format="color">#FFFFFF</attr>
+    <attr name="editorSelectorLabelColor" format="color">#5F6368</attr>
+    <attr name="editorRowContainerColor" format="color">#FFFFFF</attr>
+    <attr name="editorToolbarBackground" format="color">#F0EEE6</attr>
     <!-- Card browser -->
-    <attr name="browserHeaderBackground" format="color"/>
-    <attr name="browserHeaderLabelColor" format="color"/>
+    <attr name="browserHeaderBackground" format="color">#F0EEE6</attr>
+    <attr name="browserHeaderLabelColor" format="color">#5F6368</attr>
     <!-- Study Screen button backgrounds -->
     <attr name="showAnswerButtonBackground" format="color"/>
     <attr name="answerButtonBackground" format="color"/>
