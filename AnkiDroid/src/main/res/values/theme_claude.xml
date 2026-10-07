@@ -33,41 +33,41 @@
     <style name="Theme_Light_Claude" parent="@style/Theme_Light">
         <!-- Paper. A cream rather than pure white so long reading sessions are
              easier on the eyes, which is the point of the palette. -->
-        <item name="colorSurface">#FAF9F5</item>
-        <item name="colorSurfaceContainerLowest">#FFFFFF</item>
-        <item name="colorSurfaceContainerLow">#F5F3EC</item>
-        <item name="colorSurfaceContainer">#F0EEE6</item>
-        <item name="colorSurfaceContainerHigh">#E8E5DA</item>
-        <item name="colorSurfaceContainerHighest">#DFDBCE</item>
-        <item name="colorOnSurface">#1F1E1D</item>
-        <item name="colorOnSurfaceVariant">#6B675E</item>
-        <item name="colorOutline">#8A857A</item>
-        <item name="colorOutlineVariant">#D5D0C4</item>
+        <item name="colorSurface">@color/claude_surface</item>
+        <item name="colorSurfaceContainerLowest">@color/claude_surface_lowest</item>
+        <item name="colorSurfaceContainerLow">@color/claude_surface_low</item>
+        <item name="colorSurfaceContainer">@color/claude_surface_container</item>
+        <item name="colorSurfaceContainerHigh">@color/claude_surface_high</item>
+        <item name="colorSurfaceContainerHighest">@color/claude_surface_highest</item>
+        <item name="colorOnSurface">@color/claude_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/claude_on_surface_variant</item>
+        <item name="colorOutline">@color/claude_outline</item>
+        <item name="colorOutlineVariant">@color/claude_outline_variant</item>
 
         <!-- Terracotta. Darkened from the widely used #D97757 so that white on it,
              which is what actionBarTextColor and tabActiveIconColor use, clears AA
              at 5.02:1 instead of 3.92:1. -->
-        <item name="colorPrimary">#B0553A</item>
-        <item name="colorPrimaryDark">#8E422C</item>
-        <item name="colorOnPrimary">#FFFFFF</item>
-        <item name="colorPrimaryContainer">#F2D9CE</item>
-        <item name="colorOnPrimaryContainer">#4A2415</item>
-        <item name="colorSecondaryContainer">#E8E2D6</item>
-        <item name="colorAccent">#7A5C4A</item>
+        <item name="colorPrimary">@color/claude_primary</item>
+        <item name="colorPrimaryDark">@color/claude_primary_dark</item>
+        <item name="colorOnPrimary">@color/claude_on_primary</item>
+        <item name="colorPrimaryContainer">@color/claude_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/claude_on_primary_container</item>
+        <item name="colorSecondaryContainer">@color/claude_secondary_container</item>
+        <item name="colorAccent">@color/claude_accent</item>
 
         <!-- Chrome. appBarColor and the tab layout both track colorPrimary, so they
              warm automatically; only the hard-coded blues below needed attention. -->
-        <item name="preferenceCategoryTitleTextColor">#8E422C</item>
-        <item name="topBarColor">#F5EFE4</item>
-        <item name="currentDeckBackgroundColor">#EAE6DA</item>
-        <item name="focusedRowBackgroundColor">#EAE6DA</item>
-        <item name="alternativeBackgroundColor">#F5F3EC</item>
-        <item name="toolbarBackgroundColor">#E8E5DA</item>
-        <item name="toolbarIconColor">#1F1E1D</item>
-        <item name="popupBackgroundColor">#FAF9F5</item>
-        <item name="editTextBackgroundColor">#F0EEE6</item>
-        <item name="editTextHighlightColor">#E8C9B8</item>
-        <item name="showAnswerColor">#7A5C4A</item>
+        <item name="preferenceCategoryTitleTextColor">@color/claude_primary_dark</item>
+        <item name="topBarColor">@color/claude_counts_bar</item>
+        <item name="currentDeckBackgroundColor">@color/claude_row_background</item>
+        <item name="focusedRowBackgroundColor">@color/claude_row_background</item>
+        <item name="alternativeBackgroundColor">@color/claude_surface_low</item>
+        <item name="toolbarBackgroundColor">@color/claude_surface_high</item>
+        <item name="toolbarIconColor">@color/claude_on_surface</item>
+        <item name="popupBackgroundColor">@color/claude_surface</item>
+        <item name="editTextBackgroundColor">@color/claude_surface_container</item>
+        <item name="editTextHighlightColor">@color/claude_highlight</item>
+        <item name="showAnswerColor">@color/claude_accent</item>
 
         <!-- Semantic counts, harmonised toward this theme's own primary the same way
              the other four themes are: hue rotated 12% toward #B0553A with relative
@@ -75,12 +75,12 @@
              unrotated colour. Measured on #FAF9F5: new 8.48:1, learn 5.33:1,
              review 5.4:1. Hue separation is 96-156 degrees, so the three stay
              tellable apart. -->
-        <item name="deckNewCountColor">#1F4D6F</item>
-        <item name="deckLearnCountColor">#BE2A25</item>
-        <item name="deckReviewCountColor">#2F6626</item>
-        <item name="reviewerNewCountColor">#1F4D6F</item>
-        <item name="reviewerLearnCountColor">#BE2A25</item>
-        <item name="reviewerReviewCountColor">#2F6626</item>
-        <item name="deckZeroCountColor">#67635A</item>
+        <item name="deckNewCountColor">@color/claude_count_new</item>
+        <item name="deckLearnCountColor">@color/claude_count_learn</item>
+        <item name="deckReviewCountColor">@color/claude_count_review</item>
+        <item name="reviewerNewCountColor">@color/claude_count_new</item>
+        <item name="reviewerLearnCountColor">@color/claude_count_learn</item>
+        <item name="reviewerReviewCountColor">@color/claude_count_review</item>
+        <item name="deckZeroCountColor">@color/claude_count_zero</item>
     </style>
 </resources>
