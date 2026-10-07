@@ -12,8 +12,8 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.CheckBox
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.MainThread

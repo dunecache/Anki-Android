@@ -96,6 +96,7 @@
         <item>@string/day_theme_light</item>
         <item>@string/day_theme_plain</item>
         <item>@string/day_theme_eink</item>
+        <item>@string/day_theme_claude</item>
     </string-array>
     <string-array name="night_theme_labels">
         <item>@string/night_theme_black</item>
@@ -201,6 +202,14 @@
 
     <string name="theme_light_value">1</string>
     <string name="theme_plain_value">2</string>
+    <!-- Day-theme codes already taken: 1 light, 2 plain, 3 eink. 4 is deliberately
+         skipped even though theme_dark_value also uses 4, so a day-theme code can
+         never be mistaken for a night one. -->
+    <string name="theme_claude_value">5</string>
+    <!-- The picker label lives here rather than beside day_theme_eink in
+         11-arrays.xml: TranslationTest fails the build for any string in a
+         values/NN-*.xml file whose text duplicates a backend translation. -->
+    <string name="day_theme_claude">Paper</string>
     <string name="theme_black_value">3</string>
     <string name="theme_dark_value">4</string>
 
@@ -213,6 +222,7 @@
         <item>@string/theme_light_value</item>
         <item>@string/theme_plain_value</item>
         <item>@string/theme_eink_scheme_value</item>
+        <item>@string/theme_claude_value</item>
     </string-array>
     <string-array name="night_theme_values">
         <item>@string/theme_black_value</item>

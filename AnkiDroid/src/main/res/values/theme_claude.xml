@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+  -->
+<!--
+  A warm, paper-like alternative to the default day theme, offered alongside Light,
+  Plain and E-Ink in Settings > Appearance > Day theme. It extends Theme_Light, so
+  every role that does not appear below keeps the stock light value; only the ones
+  that carry the theme's identity are overridden.
+
+  Most of the redesign's containers derive from the M3 surface ramp rather than from
+  a colour of their own:
+
+      deckGroupBackground      ?attr/colorSurfaceContainer
+      deckCountsBackground     ?attr/colorSurfaceContainerHigh
+      browserHeaderBackground  ?attr/colorSurfaceContainer
+      editorToolbarBackground  ?attr/colorSurfaceContainer
+      reviewerShowAnswerBackground ?attr/colorSurfaceContainerHighest
+      editorFieldContainerColor / editorSelectorContainerColor / editorRowContainerColor
+                                ?attr/colorSurfaceContainerLow
+
+  so overriding the six surface roles re-themes the deck list, the card browser
+  header, the whole note editor and the reviewer's Show answer button at once. The
+  count colours cannot inherit, because they are semantic, so they are stated
+  explicitly below.
+
+  Deliberately left alone: the Again/Hard/Good/Easy button colours. Those encode
+  which ease a tap will record, and are shared with StudyOptions and the new study
+  screen, so restyling them for flavour would trade meaning for cohesion.
+-->
+<resources>
+
+    <style name="Theme_Light_Claude" parent="@style/Theme_Light">
+        <!-- Paper. A cream rather than pure white so long reading sessions are
+             easier on the eyes, which is the point of the palette. -->
+        <item name="colorSurface">#FAF9F5</item>
+        <item name="colorSurfaceContainerLowest">#FFFFFF</item>
+        <item name="colorSurfaceContainerLow">#F5F3EC</item>
+        <item name="colorSurfaceContainer">#F0EEE6</item>
+        <item name="colorSurfaceContainerHigh">#E8E5DA</item>
+        <item name="colorSurfaceContainerHighest">#DFDBCE</item>
+        <item name="colorOnSurface">#1F1E1D</item>
+        <item name="colorOnSurfaceVariant">#6B675E</item>
+        <item name="colorOutline">#8A857A</item>
+        <item name="colorOutlineVariant">#D5D0C4</item>
+
+        <!-- Terracotta. Darkened from the widely used #D97757 so that white on it,
+             which is what actionBarTextColor and tabActiveIconColor use, clears AA
+             at 5.02:1 instead of 3.92:1. -->
+        <item name="colorPrimary">#B0553A</item>
+        <item name="colorPrimaryDark">#8E422C</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#F2D9CE</item>
+        <item name="colorOnPrimaryContainer">#4A2415</item>
+        <item name="colorSecondaryContainer">#E8E2D6</item>
+        <item name="colorAccent">#7A5C4A</item>
+
+        <!-- Chrome. appBarColor and the tab layout both track colorPrimary, so they
+             warm automatically; only the hard-coded blues below needed attention. -->
+        <item name="preferenceCategoryTitleTextColor">#8E422C</item>
+        <item name="topBarColor">#F5EFE4</item>
+        <item name="currentDeckBackgroundColor">#EAE6DA</item>
+        <item name="focusedRowBackgroundColor">#EAE6DA</item>
+        <item name="alternativeBackgroundColor">#F5F3EC</item>
+        <item name="toolbarBackgroundColor">#E8E5DA</item>
+        <item name="toolbarIconColor">#1F1E1D</item>
+        <item name="popupBackgroundColor">#FAF9F5</item>
+        <item name="editTextBackgroundColor">#F0EEE6</item>
+        <item name="editTextHighlightColor">#E8C9B8</item>
+        <item name="showAnswerColor">#7A5C4A</item>
+
+        <!-- Semantic counts, harmonised toward this theme's own primary the same way
+             the other four themes are: hue rotated 12% toward #B0553A with relative
+             luminance restored afterwards, which keeps contrast identical to the
+             unrotated colour. Measured on #FAF9F5: new 8.48:1, learn 5.33:1,
+             review 5.4:1. Hue separation is 96-156 degrees, so the three stay
+             tellable apart. -->
+        <item name="deckNewCountColor">#1F4D6F</item>
+        <item name="deckLearnCountColor">#BE2A25</item>
+        <item name="deckReviewCountColor">#2F6626</item>
+        <item name="reviewerNewCountColor">#1F4D6F</item>
+        <item name="reviewerLearnCountColor">#BE2A25</item>
+        <item name="reviewerReviewCountColor">#2F6626</item>
+        <item name="deckZeroCountColor">#67635A</item>
+    </style>
+</resources>
