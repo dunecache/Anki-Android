@@ -77,6 +77,13 @@
     <!-- Half the gap either side of the counter hairline, so the counters end up
          at least 8dp apart without relying on their padding alone. -->
     <dimen name="m3_legend_label_size">10sp</dimen>
+    <!-- Each ease button insets itself by this much from its own slot, so adjacent
+         buttons end up 4dp apart while the row stays symmetric: 2dp at each outer
+         edge and 2dp on each side of the 4dp gap. Only horizontal: the same four
+         views are re-parented into a 2x2 grid when showLargeAnswerButtons is on
+         (AbstractFlashcardViewer.displayAnswerBottomBar), and a vertical margin
+         would inflate the bar height in the single-row arrangement. -->
+    <dimen name="m3_ease_button_inset">2dp</dimen>
     <dimen name="m3_counter_gap">4dp</dimen>
     <dimen name="reviewer_next_time_textSize">14sp</dimen>
 
