@@ -20,7 +20,7 @@
             <solid android:color="?attr/editorFieldContainerColor" />
             <stroke
                 android:width="@dimen/m3_stroke_thick"
-                android:color="?attr/colorPrimary" />
+                android:color="?attr/editorFieldFocusStrokeColor" />
             <corners android:radius="@dimen/m3_shape_corner_medium" />
         </shape>
     </item>

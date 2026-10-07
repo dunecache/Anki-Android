@@ -71,6 +71,7 @@
         <item name="reviewerShowAnswerLabelColor">@color/white</item>
         <item name="editorFieldContainerColor">@color/white</item>
         <item name="editorFieldStrokeColor">@color/material_grey_700</item>
+        <item name="editorFieldFocusStrokeColor">@color/black</item>
         <item name="editorFieldLabelColor">@color/black</item>
         <item name="editorSelectorContainerColor">@color/white</item>
         <item name="editorSelectorLabelColor">@color/black</item>

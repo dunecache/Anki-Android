@@ -98,6 +98,7 @@
         <item name="reviewerShowAnswerLabelColor">?attr/colorOnSurface</item>
         <item name="editorFieldContainerColor">?attr/colorSurfaceContainerLow</item>
         <item name="editorFieldStrokeColor">?attr/colorOutline</item>
+        <item name="editorFieldFocusStrokeColor">?attr/colorPrimary</item>
         <item name="editorFieldLabelColor">?attr/colorOnSurfaceVariant</item>
         <item name="editorSelectorContainerColor">?attr/colorSurfaceContainerLow</item>
         <item name="editorSelectorLabelColor">?attr/colorOnSurfaceVariant</item>

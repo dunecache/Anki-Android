@@ -167,6 +167,11 @@
     <!-- Note editor -->
     <attr name="editorFieldContainerColor" format="color">#FFFFFF</attr>
     <attr name="editorFieldStrokeColor" format="color">#BDBDBD</attr>
+    <!-- Focused stroke. Scoped rather than ?attr/colorPrimary: this drawable is
+         inflated by tests against Theme.AppCompat.Empty, which defines neither
+         colorPrimary nor any Material 3 role, and a ?attr/ reference the theme
+         cannot resolve throws at inflate time. -->
+    <attr name="editorFieldFocusStrokeColor" format="color">#1F4D6F</attr>
     <attr name="editorFieldLabelColor" format="color">#5F6368</attr>
     <attr name="editorSelectorContainerColor" format="color">#FFFFFF</attr>
     <attr name="editorSelectorLabelColor" format="color">#5F6368</attr>
