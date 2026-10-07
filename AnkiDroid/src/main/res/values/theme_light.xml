@@ -61,9 +61,9 @@
              (#F0F9FE) and colorSurfaceContainerHigh (#E4F5FD); the shared values above
              miss AA on those (learn 4.45:1, zero 1.32:1). Measured worst-case ratios:
              new 8.03:1, learn 5.03:1, review 4.58:1, zero 5.54:1. -->
-        <item name="deckNewCountColor">@color/material_indigo_700</item>
-        <item name="deckLearnCountColor">@color/material_red_800</item>
-        <item name="deckReviewCountColor">@color/material_green_800</item>
+        <item name="deckNewCountColor">#2D4296</item>
+        <item name="deckLearnCountColor">#A1521E</item>
+        <item name="deckReviewCountColor">#2E7D3E</item>
         <item name="deckZeroCountColor">@color/material_grey_700</item>
         <item name="deckGroupBackground">?attr/colorSurfaceContainer</item>
         <item name="deckGroupTitleColor">?attr/colorOnSurface</item>
@@ -80,9 +80,9 @@
              new/learn/reviewCountColor values give 6.64 / 3.68 / 3.79:1 there, so
              learn and review are darkened to material_red_900 and material_green_900
              to reach 4.86 / 5.82:1. The shared attributes above are untouched. -->
-        <item name="reviewerNewCountColor">@color/material_indigo_700</item>
-        <item name="reviewerLearnCountColor">@color/material_red_900</item>
-        <item name="reviewerReviewCountColor">@color/material_green_900</item>
+        <item name="reviewerNewCountColor">#2D4296</item>
+        <item name="reviewerLearnCountColor">#954815</item>
+        <item name="reviewerReviewCountColor">#1B5E2A</item>
         <!-- A filled *tonal* button, not a colorPrimary one: AnkiDroid's
              colorPrimary is a light blue in this theme, so white on it measures
              2.63:1 - well under AA. colorSurfaceContainerHighest with
