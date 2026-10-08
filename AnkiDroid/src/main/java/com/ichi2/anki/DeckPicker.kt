@@ -659,6 +659,18 @@ open class DeckPicker :
 
     override fun fitsSystemWindows(): Boolean = false
 
+    /**
+     * True while the deck picker is in its initial state, i.e. there are no cards and no
+     * summary line, so the FAB rests unraised.
+     *
+     * The summary's own layout listener needs this. The listener fires on any layout
+     * pass, including one that happens while the summary is on its way out, and it
+     * reads the summary's height to decide how far to raise the FAB. Before this field
+     * existed it would re-raise a FAB that [onCollectionStatusChanged] had already put
+     * back to zero, so deleting the last deck left the FAB hovering over the placeholder.
+     */
+    private var isInInitialState = false
+
     /** Raises the FAB by half the 'Studied X cards' line, so it clears the line's text */
     private fun raiseFabAboveSummary(summaryHeight: Int) {
         val fabBottomMargin = summaryHeight / 2
@@ -732,7 +744,15 @@ open class DeckPicker :
         }
         deckPickerBinding.reviewSummaryTextView.addOnLayoutChangeListener { view, _, _, _, _, _, _, _, _ ->
             // exclude paddingBottom: it holds the edge-to-edge inset, which is already applied
-            raiseFabAboveSummary(view.height - view.paddingBottom)
+            val summaryHeight =
+                if (isInInitialState) {
+                    // The summary is on its way out, so its height is stale and would
+                    // re-raise the FAB that the initial state requires to be unraised.
+                    0
+                } else {
+                    view.height - view.paddingBottom
+                }
+            raiseFabAboveSummary(summaryHeight)
         }
         // The summary is hidden until the collection loads.
         // Assume the summary takes up a single line, so it does not 'jump' up on load
@@ -818,6 +838,9 @@ open class DeckPicker :
         }
 
         fun onCollectionStatusChanged(isInInitialState: Boolean) {
+            // Recorded before the summary's visibility changes, because that change is
+            // what triggers the layout pass the listener above reacts to.
+            this@DeckPicker.isInInitialState = isInInitialState
             // no summary line in the initial state: the FAB rests unraised
             val summary = deckPickerBinding.reviewSummaryTextView
             if (isInInitialState) {
