@@ -47,7 +47,11 @@ class FieldEditLineTest : NoteEditorTest() {
     private fun fieldEditLine(): FieldEditLine {
         val reference = AtomicReference<FieldEditLine>()
         activityRule!!.scenario.onActivity { activity ->
-            reference.set(FieldEditLine(activity.baseContext))
+            // The activity itself, not activity.baseContext: the base context carries
+            // Theme.AppCompat.Empty, so inflating the line against it left every
+            // ?attr/ reference in view_card_multimedia_editline unresolvable and the
+            // inflate threw. Production inflates these rows with the themed activity.
+            reference.set(FieldEditLine(activity))
         }
         return reference.get()
     }
